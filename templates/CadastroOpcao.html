@@ -1,0 +1,724 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>MaiApp - Cadastro de Opção</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="../static/images/icon/favicon.ico">
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/css/themify-icons.css">
+    <link rel="stylesheet" href="../static/css/metisMenu.css">
+    <link rel="stylesheet" href="../static/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../static/css/slicknav.min.css">
+    <link rel="stylesheet" href="../static/css/typography.css">
+    <link rel="stylesheet" href="../static/css/default-css.css">
+    <link rel="stylesheet" href="../static/css/responsive.css">
+    <link rel="stylesheet" href="../static/css/styles.css">
+
+    <script src="../static/js/util.js"></script>
+
+</head>
+
+<body>
+
+<input id="hfUsuario_Id" type="hidden" value='{{ Usuario_Id }}'>
+<input id="hfUsuario_Email" type="hidden" value='{{ Usuario_Email }}'>
+<input id="hfUsuario_Auth" type="hidden" value='{{ Usuario_Auth }}'>
+<input id="hfpicture" type="hidden" value='{{ picture }}'>
+<input id="hfHeaderUserName" type="hidden" value='{{ HeaderUserName }}'>
+
+                                <div class="modal fade" id="ModalMsgBox" Name="ModalMsgBox">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Mensagem</h5>
+                                                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                                            </div>
+                                            <div class="modal-body" id="tbModalMsgBox" name="tbModalMsgBox" style="height:25vh;">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+   <div id="preloader">
+        <div class="loader"></div>
+    </div>
+
+
+
+    <div class="page-container">
+        {{ SideBar }}
+        <div class="main-content">
+            {{ Header }}
+         <div class="main-content-inner">
+                <div class="row">
+                    <div class="col-lg-6 col-ml-12">
+                        <div class="row">
+                            <div class="col-12 mt-5">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="header-title">Opção</h4>
+
+                    
+
+<!-- Formulario MAIN -->
+                                        <form>
+                                            <div class="form-row align-items-center">
+                                                <div class="col-sm-3 my-1">
+                                                    <fieldset disabled>
+													<div class="input-group">
+                                                        <div class="input-group-prepend"><div class="input-group-text">idOpcao</div></div>
+                                                        <input type="text" class="form-control" id="tbIDOpcao" placeholder="">
+                                                    </div>
+													</fieldset>
+                                                </div>
+                                               <div class="col-sm-9 my-1">
+                                               <fieldset disabled>
+                                               <div class="input-group">
+                                                        <div class="input-group-prepend"><div class="input-group-text">Alias</div></div>
+                                                        <input type="text" class="form-control" id="tbAlias" placeholder="Ex : RF#BRLB3@PETRP117">
+                                                    </div>
+													</fieldset>
+                                                </div>
+												<div class="col-sm-12 my-1">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend"><div class="input-group-text">Ticker</div></div>
+                                                        <input type="text" class="form-control" id="tbCodigo" placeholder="Ex : PETRP117">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 my-1">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend"><div class="input-group-text">ISIN</div></div>
+                                                        <input type="text" class="form-control" id="tbIsin" placeholder="Ex : 00000000000000">
+                                                    </div>
+                                                </div>
+												
+                                            </div>
+
+<!-- Formulario Checkboxes -->
+                                         
+										 <div class="form-row align-items-center">
+
+                                            <div class="col-sm-3 my-1" style="Margin-Left:20px;">
+												<div class="s-settings">
+													<p style="Margin:20px 0px 20px 0px;" > 	</p>
+													<div class="s-sw-title" style="background-color:#F2F7FA;border-radius:25px;">
+														<h5 style="Margin-Left:5px;">Premio Antecipado</h5>
+														<div class="s-swtich">
+															<input type="checkbox" id="cbPremioPagoAntecip" />
+															<label for="cbPremioPagoAntecip">Toggle</label>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+
+
+<!-- Formulario Combo Boxes -->
+
+                                            <div class="form-group row">
+    											<div class="col-sm-2 my-1">
+   												<label>Bolsa</label>
+                                                    <div class="input-group">
+														<select id="SlctBolsa" class="form-control" style="font-size: 80%;">
+														</select>
+                                                    </div>
+                                                </div>
+												<div class="col-sm-2 my-1">
+   												<label>Moeda</label>
+                                                    <div class="input-group">
+														<select id="SlctMoeda" class="form-control" style="font-size: 80%;">
+														</select>
+                                                    </div>
+                                                </div>
+												<div class="col-sm-4 my-1">
+   												<label>Moeda de Exercício</label>
+                                                    <div class="input-group">
+														<select id="SlctMoedaExercicio" class="form-control" style="font-size: 80%;">
+														</select>
+                                                    </div>
+                                                </div>
+												
+											</div>
+
+											<div class="form-group row">
+												<div class="col-sm-2 my-1">
+   												<label>Tipo Opção</label>
+                                                    <div class="input-group">
+														<select id="SlctTipoOpcao" class="form-control" style="font-size: 80%;">
+                                                            <option>N/A</option>
+                                                            <option>CALL</option>
+															<option>PUTT</option>
+														</select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2 my-1">
+   												<label>Estilo</label>
+                                                    <div class="input-group">
+														<select id="SlctTipoEstilo" class="form-control" style="font-size: 80%;">
+                                                            <option>N/A</option>
+                                                            <option>Europeia</option>
+															<option>Americana</option>
+														</select>
+                                                    </div>
+                                                </div>
+												<div class="col-sm-2 my-1">
+   												<label>Mercadoria</label>
+                                                    <div class="input-group">
+														<select id="SlctMercadoria" class="form-control" style="font-size: 80%;">
+														</select>
+                                                    </div>
+                                                </div>
+
+											</div>
+										 
+<!-- Formulario  Others-->
+				 
+											 <div class="form-row align-items-center">
+                                                <div class="col-sm-5 my-1">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend"><div class="input-group-text">Vencimento</div></div>
+                                                        <input class="form-control" type="date" value="" id="tbDataVencimento" >
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-5 my-1">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend"><div class="input-group-text">Conclusão</div></div>
+                                                        <input class="form-control" type="date" value="" id="tbDataConclusaoNegociacao" >
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-5 my-1">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend"><div class="input-group-text">Data Inicio</div></div>
+                                                        <input class="form-control" type="date" value="" id="tbDatainicioNegociacao" >
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-7 my-1">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend"><div class="input-group-text">Data Posição Aberta</div></div>
+                                                        <input class="form-control" type="date" value="" id="tbDataPosicaoAberto" >
+                                                    </div>
+                                                </div>
+												
+												
+												
+												
+                                               <div class="col-sm-4 my-1">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend"><div class="input-group-text">Multiplicador</div></div>
+                                                        <input type="text" class="form-control" id="tbMultiplicadorContrato" placeholder="Ex : 10" onkeyup="NumberOnly(this.id)">
+                                                    </div>
+                                                </div>
+                                               <div class="col-sm-4 my-1">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend"><div class="input-group-text">Lote</div></div>
+                                                        <input type="text" class="form-control" id="tbLoteAlocacao" placeholder="Ex : 10" onkeyup="NumberOnly(this.id)">
+                                                    </div>
+                                                </div>
+                                               <div class="col-sm-4 my-1">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend"><div class="input-group-text">Pu Exercício</div></div>
+                                                        <input type="text" class="form-control" id="tbPrecoExercicio" placeholder="Ex : 17.86" onkeyup="NumberOnly(this.id)">
+                                                    </div>
+                                                </div>
+												<div class="col-sm-4 my-1">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend"><div class="input-group-text">Quantidade</div></div>
+                                                        <input type="text" class="form-control" id="tbQuantidade" placeholder="Ex : 17.86" onkeyup="NumberOnly(this.id)">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+										 
+
+                                            <div>
+                                                <a id="submit-btn-area-a" style="margin:10px 10px 0px 0px;width:150px;float:right;" onClick="Update()" >Salvar</a>
+                                                <a id="submit-btn-area-a" style="margin:10px 10px 0px 0px;width:150px;float:right;" onClick="Insert()" >Novo</a>
+                                            </div>
+                                        </form>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+					
+					<div class="col-lg-6 col-ml-12">
+                        <div class="row">
+                            <div class="col-12 mt-5">
+                                <div class="card">
+                                    <div class="card-body">
+									
+		<!-- Listbox Formulario -->							
+                                                <div class="search-box pull-left" style = "margin:0px 0px 20px 0px;">
+													<form action="#">
+														<input type="text" id="TbSearch" name="search" placeholder="Search..." required>
+														<a style="cursor:pointer;" OnClick="CarregaBusca()"><i class="ti-search"></i></a>
+													</form>
+												</div>
+
+                                                <input id="hfPage" type="hidden">
+                                                <input id="hfnPages" type="hidden">
+                                                <div class="pull-right" style = "margin:0px 0px 50px 0px;" >									
+															<nav aria-label="Page navigation example">
+																<ul class="pagination justify-content-end">
+                                                                     <li class="page-item">
+																		<a class="page-link" OnClick="Anterior()">Anterior</a>
+																	</li>
+                                                                    <li class="page-item"><a id="LblDisplayPage" class="page-link" href="#">-</a></li>
+																	<li class="page-item">
+																		<a class="page-link" OnClick="Proximo()">Próxima</a>
+																	</li>
+																</ul>
+															</nav>
+													</div>
+										
+										
+                                                <div class="single-table">
+                                                        <div class="table-responsive">
+                                                            <table class="table text-center">
+                                                                <thead class="text-uppercase">
+                                                                    <tr>
+                                                                        <th scope="col">Alias</th>
+                                                                        <th scope="col">Vencimento</th>
+                                                                        <th scope="col">Isin</th>
+                                                                        <th scope="col"></th>
+                                                                        <th scope="col"></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="TblDados">
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+										
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+					
+                </div>
+
+            </div>
+        </div>
+        <!-- main content area end -->
+		
+		
+		
+		
+		
+		
+        <!-- footer area start-->
+        <footer>
+            <div class="footer-area">
+                <p>© Versão Beta</p>
+            </div>
+        </footer>
+        <!-- footer area end-->
+    </div>
+    
+
+    <script src="../static/js/modernizr-2.8.3.min.js"></script>
+    <script src="../static/js/jquery-2.2.4.min.js"></script>
+    <script src="../static/js/popper.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+    <script src="../static/js/owl.carousel.min.js"></script>
+    <script src="../static/js/metisMenu.min.js"></script>
+    <script src="../static/js/jquery.slimscroll.min.js"></script>
+    <script src="../static/js/jquery.slicknav.min.js"></script>
+    <script src="../static/js/plugins.js"></script>
+    <script src="../static/js/scripts.js"></script>
+
+
+
+    <script>
+        var jsonData = JSON.parse('{{ jsnDt | tojson | safe}}');
+
+        var ListaBolsa = jsonData['ListaBolsa']
+        var z = document.createElement('option'); // is a node
+            z.innerHTML = 'Selecione a Bolsa...';
+            z.setAttribute('disabled',true)
+            z.setAttribute('selected',true)
+            document.getElementById('SlctBolsa').appendChild(z) 
+        for (var key in ListaBolsa) {
+            var z = document.createElement('option'); // is a node
+            z.innerHTML = ListaBolsa[key] ;
+            z.setAttribute('value',key)
+            document.getElementById('SlctBolsa').appendChild(z) 
+        }
+
+        var ListaMoeda = jsonData['ListaMoeda']
+        var z = document.createElement('option'); // is a node
+            z.innerHTML = 'Selecione uma Moeda...';
+            z.setAttribute('disabled',true)
+            z.setAttribute('selected',true)
+            document.getElementById('SlctMoeda').appendChild(z) 
+        for (var key in ListaMoeda) {
+            var z = document.createElement('option'); // is a node
+            z.innerHTML = ListaMoeda[key];
+            z.setAttribute('value',key)
+            document.getElementById('SlctMoeda').appendChild(z) 
+        }
+
+        var ListaMoeda = jsonData['ListaMoeda']
+        var z = document.createElement('option'); // is a node
+            z.innerHTML = 'Selecione uma Moeda...';
+            z.setAttribute('disabled',true)
+            z.setAttribute('selected',true)
+            document.getElementById('SlctMoedaExercicio').appendChild(z) 
+        for (var key in ListaMoeda) {
+            var z = document.createElement('option'); // is a node
+            z.innerHTML = ListaMoeda[key] ;
+            z.setAttribute('value',key)
+            document.getElementById('SlctMoedaExercicio').appendChild(z) 
+        }
+
+        var ListaTipoMercadoriaOpcao = jsonData['ListaTipoMercadoriaOpcao']
+        var z = document.createElement('option'); // is a node
+            z.innerHTML = 'Selecione uma Mercadoria...';
+            z.setAttribute('disabled',true)
+            z.setAttribute('selected',true)
+            document.getElementById('SlctMercadoria').appendChild(z) 
+        for (var key in ListaTipoMercadoriaOpcao) {
+            var z = document.createElement('option'); // is a node
+            z.innerHTML = key;
+            z.setAttribute('value',ListaTipoMercadoriaOpcao[key])
+            document.getElementById('SlctMercadoria').appendChild(z) 
+        }
+
+//        document.getElementById("hfListaidMoeda").value = JSON.stringify(jsonData['ListaidMoeda']);
+//        document.getElementById("hfListaidBolsa").value = JSON.stringify(jsonData['ListaidBolsa']);
+
+        var UserName = document.getElementById('hfHeaderUserName').value;
+        var picturepath = document.getElementById('hfpicture').value;
+        document.getElementById('imgProfile').src = picturepath;
+        document.getElementById('NameUser').innerHTML = UserName + "<i class='fa fa-angle-down'></i>";
+    </script>
+    
+<script> 
+
+
+function Update(){
+var fd = new FormData();
+fd.append("idUsuario", document.getElementById("hfUsuario_Id").value);
+fd.append("UsuarioAuth", document.getElementById("hfUsuario_Auth").value );
+
+var ListaMoeda = jsonData['ListaMoeda']
+var ListaBolsa = jsonData['ListaBolsa']
+
+fd.append("IDOpcao", document.getElementById("tbIDOpcao").value);
+fd.append("Codigo", document.getElementById("tbCodigo").value);
+fd.append("Isin", document.getElementById("tbIsin").value);
+fd.append("PrecoExercicio", (document.getElementById("tbPrecoExercicio").value));
+fd.append("MultiplicadorContrato", (document.getElementById("tbMultiplicadorContrato").value));
+fd.append("Quantidade", (document.getElementById("tbQuantidade").value));
+fd.append("LoteAlocacao", (document.getElementById("tbLoteAlocacao").value));
+fd.append("TipoOpcao", document.getElementById("SlctTipoOpcao").value);
+fd.append("TipoEstilo", document.getElementById("SlctTipoEstilo").value);
+fd.append("TipoEstilo", document.getElementById("SlctTipoEstilo").value);
+fd.append("Alias", "Opcao#"+ListaMoeda[document.getElementById("SlctMoeda").value]+ListaBolsa[document.getElementById("SlctBolsa").value]+"@"+document.getElementById("tbCodigo").value);
+fd.append("idBolsa", document.getElementById("SlctBolsa").value);
+fd.append("idMoeda", document.getElementById("SlctMoeda").value);
+fd.append("IdMoedaPrecoExercicio", document.getElementById("SlctMoedaExercicio").value);
+fd.append("IdTipoMercadoriaOpcao", document.getElementById("SlctMercadoria").value);
+fd.append("PremioPagoAntecip", document.getElementById("cbPremioPagoAntecip").checked);
+fd.append("DataVencimento", document.getElementById("tbDataVencimento").value);
+fd.append("DatainicioNegociacao", document.getElementById("tbDatainicioNegociacao").value);
+fd.append("DataConclusaoNegociacao", document.getElementById("tbDataConclusaoNegociacao").value);
+fd.append("DataPosicaoAberto", document.getElementById("tbDataPosicaoAberto").value);
+
+var oReq = new XMLHttpRequest();
+oReq.open('POST', "/Cadastro/Opcao/Update",true);
+oReq.onload = function() {
+            var result = JSON.parse(this.responseText);    
+            if (trim(result['resposta']) == trim("Falha na Autenticação")){
+                window.location.href = "/Login";
+            }
+            else{
+                    var dvMdl = document.getElementById("tbModalMsgBox");
+                    while (dvMdl.lastElementChild) {dvMdl.removeChild(dvMdl.lastElementChild);}
+                    dvMdl.innerhtml = "";
+                    var span = document.createElement('span');
+                    span.setAttribute('style',"float:left;margin:15px 0px 0px 15px;");
+                    dvMdl.appendChild(span);
+                    span.innerHTML = "<p>" + trim(result['resposta']) + ".</p>";
+                    $(document).ready(function(){$('#ModalMsgBox').modal('show');})
+                    return;
+                }
+            }
+            oReq.send(fd);
+}
+
+function Insert(){
+var fd = new FormData();
+fd.append("idUsuario", document.getElementById("hfUsuario_Id").value);
+fd.append("UsuarioAuth", document.getElementById("hfUsuario_Auth").value );
+
+var ListaMoeda = jsonData['ListaMoeda']
+var ListaBolsa = jsonData['ListaBolsa']
+
+fd.append("IDOpcao", document.getElementById("tbIDOpcao").value);
+fd.append("Codigo", document.getElementById("tbCodigo").value);
+fd.append("Isin", document.getElementById("tbIsin").value);
+fd.append("PrecoExercicio", (document.getElementById("tbPrecoExercicio").value));
+fd.append("MultiplicadorContrato", (document.getElementById("tbMultiplicadorContrato").value));
+fd.append("Quantidade", (document.getElementById("tbQuantidade").value));
+fd.append("LoteAlocacao", (document.getElementById("tbLoteAlocacao").value));
+fd.append("TipoOpcao", document.getElementById("SlctTipoOpcao").value);
+fd.append("TipoEstilo", document.getElementById("SlctTipoEstilo").value);
+fd.append("TipoEstilo", document.getElementById("SlctTipoEstilo").value);
+fd.append("Alias", "Opcao#"+ListaMoeda[document.getElementById("SlctMoeda").value]+ListaBolsa[document.getElementById("SlctBolsa").value]+"@"+document.getElementById("tbCodigo").value);
+fd.append("idBolsa", document.getElementById("SlctBolsa").value);
+fd.append("idMoeda", document.getElementById("SlctMoeda").value);
+fd.append("IdMoedaPrecoExercicio", document.getElementById("SlctMoedaExercicio").value);
+fd.append("IdTipoMercadoriaOpcao", document.getElementById("SlctMercadoria").value);
+fd.append("PremioPagoAntecip", document.getElementById("cbPremioPagoAntecip").checked);
+fd.append("DataVencimento", document.getElementById("tbDataVencimento").value);
+fd.append("DatainicioNegociacao", document.getElementById("tbDatainicioNegociacao").value);
+fd.append("DataConclusaoNegociacao", document.getElementById("tbDataConclusaoNegociacao").value);
+fd.append("DataPosicaoAberto", document.getElementById("tbDataPosicaoAberto").value);
+
+var oReq = new XMLHttpRequest();
+oReq.open('POST', "/Cadastro/Opcao/Insert",true);
+oReq.onload = function() {
+            var result = JSON.parse(this.responseText);    
+            if (trim(result['resposta']) == trim("Falha na Autenticação")){window.location.href = "/Login";}
+            else{
+                    var dvMdl = document.getElementById("tbModalMsgBox");
+                    while (dvMdl.lastElementChild) {dvMdl.removeChild(dvMdl.lastElementChild);}
+                    dvMdl.innerhtml = "";
+                    var span = document.createElement('span');
+                    span.setAttribute('style',"float:left;margin:15px 0px 0px 15px;");
+                    dvMdl.appendChild(span);
+                    span.innerHTML = "<p>" + trim(result['resposta']) + ".</p>";
+                    $(document).ready(function(){$('#ModalMsgBox').modal('show');})
+                    return;
+                }
+            }
+            oReq.send(fd);
+}
+
+
+function CarregaBusca(){
+document.getElementById("hfPage").value = 1;
+var fd = new FormData();
+fd.append("idUsuario", document.getElementById("hfUsuario_Id").value);
+fd.append("UsuarioAuth", document.getElementById("hfUsuario_Auth").value );
+fd.append("Search", document.getElementById("TbSearch").value);
+fd.append("Pag", 1);
+fd.append("nPerPag", 10);
+var oReq = new XMLHttpRequest();
+oReq.open('POST', "/Cadastro/Opcao/Search",true);
+oReq.onload = function() {
+                                var result = JSON.parse(this.responseText);  
+                                var Tbl = document.getElementById("TblDados");
+                                while (Tbl.lastElementChild) {Tbl.removeChild(Tbl.lastElementChild);}  
+                                Tbl.innerhtml = "";
+                                var result = JSON.parse(this.responseText);    
+                                if (trim(result['resposta']) == trim("Falha na Autenticação")){window.location.href = "/Login";exit;}
+                                if (trim(result['resposta']) != trim("Ok"))
+                                {document.getElementById("LblDisplayPage").innerText='-';throw new Error(trim(result['resposta']));exit;}
+                                else{
+                                    var Dados=result['Dados'];
+                                    document.getElementById("hfnPages").value = Dados["nPags"];
+                                    document.getElementById("LblDisplayPage").innerText = Dados["Pag"]+" de "+Math.max(Dados["nPags"],1) ;
+                                    for (k in Dados["Lista"]) {
+                                                                var Header = document.createElement('tr');
+                                                                Header.setAttribute('class',"heading-td")
+                                                                Header.setAttribute('id',k);
+                                                                var HeaderCol = document.createElement('td');HeaderCol.innerHTML = Dados["Lista"][k]["Alias"];Header.appendChild(HeaderCol);
+                                                                var HeaderCol = document.createElement('td');HeaderCol.innerHTML = Dados["Lista"][k]["DataVencimento"];Header.appendChild(HeaderCol);
+                                                                var HeaderCol = document.createElement('td');HeaderCol.innerHTML = Dados["Lista"][k]["Isin"];Header.appendChild(HeaderCol);
+                                                                var HeaderCol = document.createElement('td');HeaderCol.innerHTML = '<a id="DeleteObj#'+k+'" onClick="Delete(this.id)"><i class="ti-trash"></i></a>';Header.appendChild(HeaderCol);
+                                                                var HeaderCol = document.createElement('td');HeaderCol.innerHTML = '<a id="DisplayObj#'+k+'" onClick="Display(this.id)"><i class="ti-eye"></i></a>';Header.appendChild(HeaderCol);
+                                                                Tbl.appendChild(Header);
+                                                                }
+                                }
+                            }
+oReq.send(fd);
+}
+
+
+function Display(s){
+var idLista = document.getElementById(s).id;
+var fd = new FormData();
+fd.append("IDOpcao", trim(Right(idLista,idLista.length-idLista.search("#")-1)));
+fd.append("idUsuario", document.getElementById("hfUsuario_Id").value);
+fd.append("UsuarioAuth", document.getElementById("hfUsuario_Auth").value );
+var oReq = new XMLHttpRequest();
+oReq.open('POST', "/Cadastro/Opcao/Load",true);
+oReq.onload = function() {
+                            var result = JSON.parse(this.responseText); 
+                            if (trim(result['resposta']) == trim("Falha na Autenticação")){window.location.href = "/Login";exit;}
+                            if (trim(result['resposta']) != trim("Ok")){throw new Error(trim(result['resposta']));exit;}
+                            else{
+                                var Dados=result['Dados'];
+                                document.getElementById("tbIDOpcao").value = Dados["IDOpcao"];
+                                document.getElementById("tbCodigo").value = Dados["Codigo"];
+                                document.getElementById("tbIsin").value = Dados["Isin"];
+                                document.getElementById("tbPrecoExercicio").value = vl_to_float_brl(Dados["PrecoExercicio"]);
+                                document.getElementById("tbMultiplicadorContrato").value = vl_to_float_brl(Dados["MultiplicadorContrato"]);
+                                document.getElementById("tbQuantidade").value = vl_to_float_brl(Dados["Quantidade"]);
+                                document.getElementById("tbLoteAlocacao").value = vl_to_float_brl(Dados["LoteAlocacao"]);
+                                document.getElementById("tbAlias").value = Dados["Alias"];
+                                document.getElementById("SlctTipoOpcao").value = Dados["TipoOpcao"];
+                                document.getElementById("SlctTipoEstilo").value = Dados["TipoEstilo"];
+                                document.getElementById("cbPremioPagoAntecip").checked = (Dados["PremioPagoAntecip"] === '1' ? true : false) ;;
+                                document.getElementById("SlctBolsa").value = Dados["idBolsa"];
+                                document.getElementById("SlctMoeda").value = Dados["idMoeda"];
+                                document.getElementById("SlctMercadoria").value = Dados["IdTipoMercadoriaOpcao"];
+                                document.getElementById("SlctMoedaExercicio").value = Dados["IdMoedaPrecoExercicio"];
+                                if(Dados["DataVencimento"]!=="1899-12-30" && Dados["DataVencimento"]!=="1900-01-01"){document.getElementById("tbDataVencimento").value = (Dados["DataVencimento"]);}else{document.getElementById("tbDataVencimento").value = "";}
+                                if(Dados["DatainicioNegociacao"]!=="1899-12-30" && Dados["DatainicioNegociacao"]!=="1900-01-01"){document.getElementById("tbDatainicioNegociacao").value = (Dados["DatainicioNegociacao"]);}else{document.getElementById("tbDatainicioNegociacao").value = "";}
+                                if(Dados["DataConclusaoNegociacao"]!=="1899-12-30" && Dados["DataConclusaoNegociacao"]!=="1900-01-01"){document.getElementById("tbDataConclusaoNegociacao").value = (Dados["DataConclusaoNegociacao"]);}else{document.getElementById("tbDataConclusaoNegociacao").value = "";}
+                                if(Dados["DataPosicaoAberto"]!=="1899-12-30" && Dados["DataPosicaoAberto"]!=="1900-01-01"){document.getElementById("tbDataPosicaoAberto").value = (Dados["DataPosicaoAberto"]);}else{document.getElementById("tbDataPosicaoAberto").value = "";}                                
+                           }
+                          }
+oReq.send(fd);
+}
+
+function Delete(s){
+var idLista = document.getElementById(s).id;
+var fd = new FormData();
+fd.append("IDOpcao", trim(Right(idLista,idLista.length-idLista.search("#")-1)));
+fd.append("idUsuario", document.getElementById("hfUsuario_Id").value);
+fd.append("UsuarioAuth", document.getElementById("hfUsuario_Auth").value );
+var oReq = new XMLHttpRequest();
+        oReq.open('POST', "/Cadastro/Opcao/Delete",true);
+        oReq.onload = function() {
+                                        var result = JSON.parse(this.responseText); 
+                                        if (trim(result['resposta']) == trim("Falha na Autenticação")){window.location.href = "/Login";exit;}
+                                        else{
+
+
+                                            var Tbl = document.getElementById("TblDados");
+                                                var vv = false;
+                                                for (var i = 0, row; row = Tbl.rows[i]; i++) {
+                                                    if (row.getAttribute('id') == trim(Right(idLista, idLista.length - idLista.search("#") - 1))) {
+                                                        Tbl.deleteRow(i);
+                                                    }
+                                                }   
+                                            
+
+                                                var dvMdl = document.getElementById("tbModalMsgBox");
+                                                while (dvMdl.lastElementChild) {dvMdl.removeChild(dvMdl.lastElementChild);}
+                                                dvMdl.innerhtml = "";
+                                                var span = document.createElement('span');
+                                                span.setAttribute('style',"float:left;margin:15px 0px 0px 15px;");
+                                                dvMdl.appendChild(span);
+                                                span.innerHTML = "<p>" + trim(result['resposta']) + ".</p>";
+                                                $(document).ready(function(){$('#ModalMsgBox').modal('show');})
+                                                return;
+                                            }
+                                   }
+        oReq.send(fd);
+}
+
+function Proximo(){
+
+if(parseFloat(document.getElementById("hfnPages").value) >= parseFloat(document.getElementById("hfPage").value)+1)
+{document.getElementById("hfPage").value=parseFloat(document.getElementById("hfPage").value)+1;}
+
+var fd = new FormData();
+fd.append("idUsuario", document.getElementById("hfUsuario_Id").value);
+fd.append("UsuarioAuth", document.getElementById("hfUsuario_Auth").value );
+fd.append("Search", document.getElementById("TbSearch").value);
+fd.append("Pag", document.getElementById("hfPage").value);
+fd.append("nPerPag", 10);
+
+var oReq = new XMLHttpRequest();
+oReq.open('POST', "/Cadastro/Opcao/Search",true);
+oReq.onload = function() {
+        var result = JSON.parse(this.responseText);  
+        var Tbl = document.getElementById("TblDados"); 
+        var result = JSON.parse(this.responseText);    
+        if (trim(result['resposta']) == trim("Falha na Autenticação")){window.location.href = "/Login";exit;}
+        if (trim(result['resposta']) != trim("Ok"))
+        {document.getElementById("LblDisplayPage").innerText='-';throw new Error(trim(result['resposta']));exit;}
+        else{
+            while (Tbl.lastElementChild) {Tbl.removeChild(Tbl.lastElementChild);}  
+            Tbl.innerhtml = "";
+            var Dados=result['Dados'];
+            document.getElementById("hfnPages").value = Dados["nPags"];
+            document.getElementById("LblDisplayPage").innerText = Dados["Pag"]+" de "+Math.max(Dados["nPags"],1) ;
+            for (k in Dados["Lista"]) {
+                var Header = document.createElement('tr');
+                Header.setAttribute('class',"heading-td")
+                Header.setAttribute('id',k);
+                var HeaderCol = document.createElement('td');HeaderCol.innerHTML = Dados["Lista"][k]["Alias"];Header.appendChild(HeaderCol);
+                var HeaderCol = document.createElement('td');HeaderCol.innerHTML = Dados["Lista"][k]["DataVencimento"];Header.appendChild(HeaderCol);
+                var HeaderCol = document.createElement('td');HeaderCol.innerHTML = Dados["Lista"][k]["Isin"];Header.appendChild(HeaderCol);
+                var HeaderCol = document.createElement('td');HeaderCol.innerHTML = '<a id="DeleteObj#'+k+'" onClick="Delete(this.id)"><i class="ti-trash"></i></a>';Header.appendChild(HeaderCol);
+                var HeaderCol = document.createElement('td');HeaderCol.innerHTML = '<a id="DisplayObj#'+k+'" onClick="Display(this.id)"><i class="ti-eye"></i></a>';Header.appendChild(HeaderCol);
+                Tbl.appendChild(Header);
+                }
+        }
+    }
+oReq.send(fd);
+}
+
+function Anterior(){
+
+if(1 <= parseFloat(document.getElementById("hfPage").value)-1)
+{document.getElementById("hfPage").value=parseFloat(document.getElementById("hfPage").value)-1;}
+else{throw new Error("Não tem pagina menor que 1!");}
+
+var fd = new FormData();
+fd.append("idUsuario", document.getElementById("hfUsuario_Id").value);
+fd.append("UsuarioAuth", document.getElementById("hfUsuario_Auth").value );
+fd.append("Search", document.getElementById("TbSearch").value);
+fd.append("Pag", document.getElementById("hfPage").value);
+fd.append("nPerPag", 10);
+var oReq = new XMLHttpRequest();
+oReq.open('POST', "/Cadastro/Opcao/Search",true);
+oReq.onload = function() {
+        var result = JSON.parse(this.responseText);  
+        var Tbl = document.getElementById("TblDados"); 
+        var result = JSON.parse(this.responseText);    
+        if (trim(result['resposta']) == trim("Falha na Autenticação")){window.location.href = "/Login";exit;}
+        if (trim(result['resposta']) != trim("Ok"))
+        {document.getElementById("LblDisplayPage").innerText='-';throw new Error(trim(result['resposta']));exit;}
+        else{
+            while (Tbl.lastElementChild) {Tbl.removeChild(Tbl.lastElementChild);}  
+            Tbl.innerhtml = "";
+            var Dados=result['Dados'];
+            document.getElementById("hfnPages").value = Dados["nPags"];
+            document.getElementById("LblDisplayPage").innerText = Dados["Pag"]+" de "+Math.max(Dados["nPags"],1) ;
+            for (k in Dados["Lista"]) {
+                var Header = document.createElement('tr');
+                Header.setAttribute('class',"heading-td")
+                Header.setAttribute('id',k);
+                var HeaderCol = document.createElement('td');HeaderCol.innerHTML = Dados["Lista"][k]["Alias"];Header.appendChild(HeaderCol);
+                var HeaderCol = document.createElement('td');HeaderCol.innerHTML = Dados["Lista"][k]["DataVencimento"];Header.appendChild(HeaderCol);
+                var HeaderCol = document.createElement('td');HeaderCol.innerHTML = Dados["Lista"][k]["Isin"];Header.appendChild(HeaderCol);
+                var HeaderCol = document.createElement('td');HeaderCol.innerHTML = '<a id="DeleteObj#'+k+'" onClick="Delete(this.id)"><i class="ti-trash"></i></a>';Header.appendChild(HeaderCol);
+                var HeaderCol = document.createElement('td');HeaderCol.innerHTML = '<a id="DisplayObj#'+k+'" onClick="Display(this.id)"><i class="ti-eye"></i></a>';Header.appendChild(HeaderCol);
+                Tbl.appendChild(Header);
+                }
+        }
+    }
+oReq.send(fd);
+}
+
+
+</script>
+
+
+
+
+</body>
+
+</html>
