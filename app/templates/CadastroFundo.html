@@ -1,0 +1,942 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>MaiApp - Cadastro de Fundo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="../static/images/icon/favicon.ico">
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/css/themify-icons.css">
+    <link rel="stylesheet" href="../static/css/metisMenu.css">
+    <link rel="stylesheet" href="../static/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../static/css/slicknav.min.css">
+    <link rel="stylesheet" href="../static/css/typography.css">
+    <link rel="stylesheet" href="../static/css/default-css.css">
+    <link rel="stylesheet" href="../static/css/responsive.css">
+    <link rel="stylesheet" href="../static/css/styles.css">
+
+    <script src="../static/js/util.js"></script>
+
+
+</head>
+
+<body>
+
+    <input id="hfUsuario_Id" type="hidden" value='{{ Usuario_Id }}'>
+    <input id="hfUsuario_Email" type="hidden" value='{{ Usuario_Email }}'>
+    <input id="hfUsuario_Auth" type="hidden" value='{{ Usuario_Auth }}'>
+    <input id="hfpicture" type="hidden" value='{{ picture }}'>
+    <input id="hfHeaderUserName" type="hidden" value='{{ HeaderUserName }}'>
+
+                                <div class="modal fade" id="ModalMsgBox" Name="ModalMsgBox">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Mensagem</h5>
+                                                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                                            </div>
+                                            <div class="modal-body" id="tbModalMsgBox" name="tbModalMsgBox" style="height:25vh;">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+   <div id="preloader">
+        <div class="loader"></div>
+    </div>
+
+
+    <div class="page-container">
+        {{ SideBar }}
+        <div class="main-content">
+            {{ Header }}
+         <div class="main-content-inner">
+                <div class="row">
+                    <div class="col-lg-6 col-ml-12">
+                        <div class="row">
+                            <div class="col-12 mt-5">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="header-title">Fundo</h4>
+
+<!-- Formulario MAIN -->
+                                        <form>
+                                            <div class="form-row align-items-center">
+                                                <div class="col-sm-3 my-1">
+                                                    <fieldset disabled>
+													<div class="input-group">
+                                                        <div class="input-group-prepend"><div class="input-group-text">idFundo</div></div>
+                                                        <input type="text" class="form-control" id="tbIdFundo" placeholder="0">
+                                                    </div>
+													</fieldset>
+                                                </div>
+                                               <div class="col-sm-9 my-1">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend"><div class="input-group-text">Alias</div></div>
+                                                        <input type="text" class="form-control" id="tbAlias" placeholder="Ex : Teste FIM">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12 my-1">
+                                                    <fieldset disabled>
+													<div class="input-group">
+                                                        <div class="input-group-prepend"><div class="input-group-text">Alias Cota</div></div>
+                                                        <input type="text" class="form-control" id="tbAliasCota" placeholder="Ex: Cota#BRLB3@000000000000">
+                                                    </div>
+													</fieldset>
+                                                </div>
+												<div class="col-sm-12 my-1">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend"><div class="input-group-text">Nome</div></div>
+                                                        <input type="text" class="form-control" id="tbNome" placeholder="Ex : Teste Fundo de Investimento Multimercado">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 my-1">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend"><div class="input-group-text">CGC</div></div>
+                                                        <input type="text" class="form-control" id="tbCGC" placeholder="Ex : 00000000000000">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 my-1">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend"><div class="input-group-text">ISIN</div></div>
+                                                        <input type="text" class="form-control" id="tbISIN" placeholder="Ex : 00000000000000">
+                                                    </div>
+                                                </div>
+												
+                                            </div>
+
+<!-- Formulario Checkboxes -->
+                                         
+										 <div class="form-row align-items-center">
+
+                                            <div class="col-sm-2 my-1" style="Margin-Left:20px;">
+												<div class="s-settings">
+													<p style="Margin:20px 0px 20px 0px;" ></p>
+													<div class="s-sw-title" style="background-color:#F2F7FA;border-radius:25px;">
+														<h5 style="Margin-Left:5px;">4661</h5>
+														<div class="s-swtich">
+															<input type="checkbox" id="cb4661"/>
+															<label for="cb4661">Toggle</label>
+														</div>
+													</div>
+													<div class="s-sw-title" style="background-color:#F2F7FA;border-radius:25px;">
+														<h5 style="Margin-Left:5px;">4444</h5>
+														<div class="s-swtich">
+															<input type="checkbox" id="cb4444" />
+															<label for="cb4444">Toggle</label>
+														</div>
+													</div>
+													<div class="s-sw-title" style="background-color:#F2F7FA;border-radius:25px;">
+														<h5 style="Margin-Left:5px;">3922</h5>
+														<div class="s-swtich">
+															<input type="checkbox" id="cb3922" />
+															<label for="cb3922">Toggle</label>
+														</div>
+													</div>
+												</div>
+											</div>
+
+                                            <div class="col-sm-3 my-1" style="Margin-Left:20px;">
+												<div class="s-settings">
+													<p style="Margin:20px 0px 20px 0px;" > 	</p>
+													<div class="s-sw-title" style="background-color:#F2F7FA;border-radius:25px;">
+														<h5 style="Margin-Left:5px;">Passivo Restrito</h5>
+														<div class="s-swtich">
+															<input type="checkbox" id="cbPassivoRestrito" />
+															<label for="cbPassivoRestrito">Toggle</label>
+														</div>
+													</div>
+														<div class="s-sw-title" style="background-color:#F2F7FA;border-radius:25px;">
+													<h5 style="Margin-Left:5px;">Permite Derivativos</h5>
+														<div class="s-swtich">
+															<input type="checkbox" id="cbDerivativos" />
+															<label for="cbDerivativos">Toggle</label>
+														</div>
+													</div>
+													<div class="s-sw-title" style="background-color:#F2F7FA;border-radius:25px;">
+														<h5 style="Margin-Left:5px;">Incentivo Fiscal</h5>
+														<div class="s-swtich">
+															<input type="checkbox" id="cbIncentivoFiscal" />
+															<label for="cbIncentivoFiscal">Toggle</label>
+														</div>
+													</div>
+												</div>
+											</div>
+                                            <div class="col-sm-3 my-1" style="Margin-Left:20px;">
+												<div class="s-settings">
+												<p style="Margin:20px 0px 20px 0px;" ></p>
+													<div class="s-sw-title" style="background-color:#F2F7FA;border-radius:25px;">
+														<h5 style="Margin-Left:5px;">Venda a Descoberto</h5>
+														<div class="s-swtich">
+															<input type="checkbox" id="cbDescoberto" />
+															<label for="cbDescoberto">Toggle</label>
+														</div>
+													</div>
+													<div class="s-sw-title" style="background-color:#F2F7FA;border-radius:25px;">
+														<h5 style="Margin-Left:5px;">Fundo de Abertura</h5>
+														<div class="s-swtich">
+															<input type="checkbox" id="cbAbertura" />
+															<label for="cbAbertura">Toggle</label>
+														</div>
+													</div>
+												</div>
+											</div>
+                                            <div class="col-sm-2 my-1" style="Margin-Left:20px;">
+												<div class="s-settings">
+												<p style="Margin:20px 0px 20px 0px;" ></p>
+													<div class="s-sw-title" style="background-color:#F2F7FA;border-radius:25px;">
+														<h5 style="Margin-Left:5px;">FIC</h5>
+														<div class="s-swtich">
+															<input type="checkbox" id="cbFIC" />
+															<label for="cbFIC">Toggle</label>
+														</div>
+													</div>
+													<div class="s-sw-title" style="background-color:#F2F7FA;border-radius:25px;">
+														<h5 style="Margin-Left:5px;">ETF</h5>
+														<div class="s-swtich">
+															<input type="checkbox" id="cbETF" />
+															<label for="cbETF">Toggle</label>
+														</div>
+													</div>
+													<div class="s-sw-title" style="background-color:#F2F7FA;border-radius:25px;">
+														<h5 style="Margin-Left:5px;">Interno</h5>
+														<div class="s-swtich">
+															<input type="checkbox" id="cbInterno" />
+															<label for="cbInterno">Toggle</label>
+														</div>
+													</div>
+												</div>
+											</div>
+
+										</div>
+
+
+<!-- Formulario Combo Boxes -->
+
+                                            <div class="form-group row">
+                                                <div class="col-sm-6 my-1">
+   												<label>Administrador</label>
+                                                    <div class="input-group">
+														<select id="SlctAdministrador" class="form-control" style="font-size: 80%;">
+															<option>INTRAG</option>
+															<option>VORTEX</option>
+															<option>BRADESCO</option>
+															<option>BNY MELLON</option>
+															<option>SANTANDER</option>
+															<option>PLANER</option>
+															<option>SAFRA</option>
+															<option>SOCOPA</option>
+															<option>OLIVEIRA TRUST</option>
+															<option>BTG PACTUAL</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+    											<div class="col-sm-6 my-1">
+   												<label>Bolsa</label>
+                                                    <div class="input-group">
+                                                        <select id="SlctBolsa" class="form-control" style="font-size: 80%;">
+														</select>
+                                                    </div>
+                                                </div>
+												<div class="col-sm-6 my-1">
+   												<label>Moeda</label>
+                                                    <div class="input-group">
+														<select id="SlctMoeda" class="form-control" style="font-size: 80%;">
+														</select>
+                                                    </div>
+                                                </div>
+												<div class="col-sm-6 my-1">
+   												<label>Tipo de Condomínio</label>
+                                                    <div class="input-group">
+														<select id="SlctTipoCondominio" class="form-control" style="font-size: 80%;">
+															<option>Aberto</option>
+															<option>Fechado</option>
+														</select>
+                                                    </div>
+                                                </div>
+
+												<div class="col-sm-6 my-1">
+   												<label>Segmento</label>
+                                                    <div class="input-group">
+														<select id="SlctSegmento" class="form-control" style="font-size: 80%;">
+															<option>RF</option>
+															<option>FIA</option>
+															<option>IE</option>
+															<option>FIM</option>
+															<option>FIDC</option>
+															<option>FIDC-NP</option>
+															<option>FIP</option>
+															<option>FII</option>
+															<option>Fundo de Indice</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+												<div class="col-sm-6 my-1">
+   												<label>Tipo Público</label>
+                                                    <div class="input-group">
+														<select id="SlctPublico" class="form-control" style="font-size: 80%;">
+															<option>Qualificado</option>
+															<option>Profissional</option>
+															<option>Geral</option>
+														</select>
+                                                    </div>
+                                                </div>
+
+												<div class="col-sm-6 my-1">
+   												<label>Tipo</label>
+                                                    <div class="input-group">
+														<select id="SlctTipo" class="form-control" style="font-size: 80%;">
+															<option>N/A</option>
+															<option>RF</option>
+															<option>CP</option>
+															<option>FIC CP</option>
+															<option>Referenciado</option>
+															<option>Participações</option>
+                                                            <option>Direitos Creditórios</option>
+                                                            <option>Imobiliario</option>
+                                                            <option>Indice</option>
+                                                            <option>Divida Externa</option>
+                                                            <option>Mercado de Acesso</option>
+                                                            <option>Empresas Emergentes</option>
+                                                            <option>NP</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+												<div class="col-sm-6 my-1">
+   												<label>Subtipo</label>
+                                                    <div class="input-group">
+														<select id="SlctSubtipo" class="form-control" style="font-size: 80%;">
+															<option>N/A</option>
+															<option>Ibovespa</option>
+															<option>IMA-B</option>
+															<option>IMA-B +</option>
+															<option>DI</option>
+															<option>IFRM</option>
+															<option>IFRM+</option>
+															<option>Multicendentre Multisacado</option>
+															<option>Multicendentre</option>
+															<option>Multisacado</option>
+                                                            <option>Senior</option>
+                                                            <option>Subordinada</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+	
+
+
+												
+											</div>
+										 
+<!-- Formulario  Others-->
+				 
+											 <div class="form-row align-items-center">
+                                                <div class="col-sm-6 my-1">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend"><div class="input-group-text">Inicio Gestão MAI</div></div>
+                                                        <input class="form-control" type="date" value="" id="tbDataInicioMai" >
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 my-1">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend"><div class="input-group-text">Fim Gestão MAI</div></div>
+                                                        <input class="form-control" type="date" value="" id="tbDataFimMai" >
+                                                    </div>
+                                                </div>
+                                               <div class="col-sm-12 my-1">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend"><div class="input-group-text">Taxa de Administração</div></div>
+                                                        <input type="text" class="form-control" id="tbTaxaAdministracao" placeholder="Ex : 0,007" onkeyup="NumberOnlyPerc(this.id)">
+                                                    </div>
+                                                </div>
+                                               <div class="col-sm-12 my-1">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend"><div class="input-group-text">Taxa de Performance</div></div>
+                                                        <input type="text" class="form-control" id="tbTaxaPerformance" placeholder="Ex : 0,005" onkeyup="NumberOnlyPerc(this.id)">
+                                                    </div>
+                                                </div>
+                                               <div class="col-sm-12 my-1">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend"><div class="input-group-text">Alavancagem</div></div>
+                                                        <input type="text" class="form-control" id="tbAlavancagem" placeholder="Ex : 1" onkeyup="NumberOnly(this.id)">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12 my-1">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend"><div class="input-group-text">Benchmark</div></div>
+                                                        <input type="text" class="form-control" id="tbBenchmark" placeholder="Ex : BenchComposto(CDI;100%;0)" >
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12 my-1">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend"><div class="input-group-text">Regra de Resgate</div></div>
+                                                        <input type="text" class="form-control" id="tbRegraResgate" placeholder="Ex : genericrule(2;DU;2;DU)">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12 my-1">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend"><div class="input-group-text">Regra de Aplicação</div></div>
+                                                        <input type="text" class="form-control" id="tbRegraAplicacao" placeholder="Ex : genericrule(2;DU;2;DU)">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-5 my-1">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend"><div class="input-group-text">Conta CETIP</div></div>
+                                                        <input type="text" class="form-control" id="tbContaCETIP" placeholder="Ex: 00666" onkeyup="NumberOnly(this.id)">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4 my-1">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend"><div class="input-group-text">Miolo CETIP</div></div>
+                                                        <input type="text" class="form-control" id="tbMioloCETIP" placeholder="Ex: 00666" onkeyup="NumberOnly(this.id)">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3 my-1">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend"><div class="input-group-text">Dgt CETIP</div></div>
+                                                        <input type="text" class="form-control" id="tbDigitoCETIP" placeholder="Ex: 1" onkeyup="NumberOnly(this.id)">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2 my-1">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend"><div class="input-group-text">Banco</div></div>
+                                                        <input type="text" class="form-control" id="tbBanco" placeholder="Ex: 271" onkeyup="NumberOnly(this.id)">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4 my-1">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend"><div class="input-group-text">Agencia</div></div>
+                                                        <input type="text" class="form-control" id="tbAgencia" placeholder="Ex: 00666" onkeyup="NumberOnly(this.id)">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4 my-1">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend"><div class="input-group-text">Conta</div></div>
+                                                        <input type="text" class="form-control" id="tbConta" placeholder="Ex: 00666" onkeyup="NumberOnly(this.id)">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2 my-1">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend"><div class="input-group-text">Dgto</div></div>
+                                                        <input type="text" class="form-control" id="tbDigito" placeholder="Ex: 1" onkeyup="NumberOnly(this.id)">
+                                                    </div>
+                                                </div>
+                                            </div>
+										 
+
+                                            <div>
+                                                <a id="submit-btn-area-a" style="margin:10px 10px 0px 0px;width:150px;float:right;" onClick="Update()" >Salvar</a>
+                                                <a id="submit-btn-area-a" style="margin:10px 10px 0px 0px;width:150px;float:right;" onClick="Insert()" >Novo</a>
+                                            </div>
+                                            
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+					
+					<div class="col-lg-6 col-ml-12">
+                        <div class="row">
+                            <div class="col-12 mt-5">
+                                <div class="card">
+                                    <div class="card-body">
+									
+		<!-- Listbox Formulario -->							
+                                                <div class="search-box pull-left" style = "margin:0px 0px 20px 0px;">
+													<form action="#">
+														<input type="text" id="TbSearch" name="search" placeholder="Search..." required>
+														<a style="cursor:pointer;" OnClick="CarregaBusca()"><i class="ti-search"></i></a>
+													</form>
+												</div>
+
+                                                <input id="hfPage" type="hidden">
+                                                <input id="hfnPages" type="hidden">
+                                                <div class="pull-right" style = "margin:0px 0px 50px 0px;" >									
+															<nav aria-label="Page navigation example">
+																<ul class="pagination justify-content-end">
+                                                                     <li class="page-item">
+																		<a class="page-link" OnClick="Anterior()">Anterior</a>
+																	</li>
+                                                                    <li class="page-item"><a id="LblDisplayPage" class="page-link" href="#">-</a></li>
+																	<li class="page-item">
+																		<a class="page-link" OnClick="Proximo()">Próxima</a>
+																	</li>
+																</ul>
+															</nav>
+													</div>
+										
+				                <div class="single-table">
+                                    <div class="table-responsive">
+                                        <table class="table text-center">
+                                            <thead class="text-uppercase">
+                                                <tr>
+                                                    <th scope="col">CGC</th>
+                                                    <th scope="col">Alias</th>
+                                                    <th scope="col">Administrador</th>
+                                                    <th scope="col"></th>
+                                                    <th scope="col"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="TblDados">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+										
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+					
+                </div>
+            </div>
+        </div>
+        <!-- main content area end -->
+        <!-- footer area start-->
+        <footer>
+            <div class="footer-area">
+                <p>© Versão Beta</p>
+            </div>
+        </footer>
+        <!-- footer area end-->
+    </div>
+    
+
+    <script src="../static/js/modernizr-2.8.3.min.js"></script>
+    <script src="../static/js/jquery-2.2.4.min.js"></script>
+    <script src="../static/js/popper.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+    <script src="../static/js/owl.carousel.min.js"></script>
+    <script src="../static/js/metisMenu.min.js"></script>
+    <script src="../static/js/jquery.slimscroll.min.js"></script>
+    <script src="../static/js/jquery.slicknav.min.js"></script>
+    <script src="../static/js/plugins.js"></script>
+    <script src="../static/js/scripts.js"></script>
+
+
+
+    <script>
+        var jsonData = JSON.parse('{{ jsnDt | tojson | safe}}');
+
+        var ListaBolsa = jsonData['ListaBolsa']
+        var z = document.createElement('option'); // is a node
+            z.innerHTML = 'Selecione a Bolsa...';
+            z.setAttribute('disabled',true)
+            z.setAttribute('selected',true)
+            document.getElementById('SlctBolsa').appendChild(z) 
+        for (var key in ListaBolsa) {
+            var z = document.createElement('option'); // is a node
+            z.innerHTML = ListaBolsa[key] ;
+            z.setAttribute('value',key)
+            document.getElementById('SlctBolsa').appendChild(z) 
+        }
+
+        var ListaMoeda = jsonData['ListaMoeda']
+        var z = document.createElement('option'); // is a node
+            z.innerHTML = 'Selecione uma Moeda...';
+            z.setAttribute('disabled',true)
+            z.setAttribute('selected',true)
+            document.getElementById('SlctMoeda').appendChild(z) 
+        for (var key in ListaMoeda) {
+            var z = document.createElement('option'); // is a node
+            z.innerHTML = ListaMoeda[key];
+            z.setAttribute('value',key)
+            document.getElementById('SlctMoeda').appendChild(z) 
+        }
+
+        
+        var UserName = document.getElementById('hfHeaderUserName').value;
+        var picturepath = document.getElementById('hfpicture').value;
+        document.getElementById('imgProfile').src = picturepath;
+        document.getElementById('NameUser').innerHTML = UserName + "<i class='fa fa-angle-down'></i>";
+    </script>
+    
+<script> 
+
+
+function Update(){
+var fd = new FormData();
+fd.append("idUsuario", document.getElementById("hfUsuario_Id").value);
+fd.append("UsuarioAuth", document.getElementById("hfUsuario_Auth").value );
+
+var ListaMoeda = jsonData['ListaMoeda']
+var ListaBolsa = jsonData['ListaBolsa']
+
+fd.append("Alias", document.getElementById("tbAlias").value);
+fd.append("IDFundo", document.getElementById("tbIdFundo").value);
+fd.append("CGC", document.getElementById("tbCGC").value);
+fd.append("Nome", document.getElementById("tbNome").value);
+fd.append("Tipo", document.getElementById("SlctTipo").value);
+fd.append("RegraResgate", document.getElementById("tbRegraResgate").value);
+fd.append("RegraAplicacao", document.getElementById("tbRegraAplicacao").value);
+fd.append("Administrador", document.getElementById("SlctAdministrador").value);
+fd.append("TaxaPerformance", taxa_to_perc(document.getElementById("tbTaxaPerformance").value) );
+fd.append("TaxaAdministracao", taxa_to_perc(document.getElementById("tbTaxaAdministracao").value));
+fd.append("DataInicioMai", document.getElementById("tbDataInicioMai").value);
+fd.append("DataFimMai", document.getElementById("tbDataFimMai").value);
+fd.append("Descoberto", document.getElementById("cbDescoberto").checked);
+fd.append("Banco", document.getElementById("tbBanco").value);
+fd.append("Agencia", document.getElementById("tbAgencia").value);
+fd.append("Conta", document.getElementById("tbConta").value);
+fd.append("CetipConta", document.getElementById("tbContaCETIP").value);
+fd.append("CetipMiolo", document.getElementById("tbMioloCETIP").value);
+fd.append("ISIN", document.getElementById("tbISIN").value);
+fd.append("AliasCota", "Cota#"+ListaMoeda[document.getElementById("SlctMoeda").value]+ListaBolsa[document.getElementById("SlctBolsa").value]+"@"+document.getElementById("tbCGC").value);
+fd.append("IdBolsa", document.getElementById("SlctBolsa").value);
+fd.append("IdMoeda", document.getElementById("SlctMoeda").value);
+fd.append("Adaptado4661", document.getElementById("cb4661").checked);
+fd.append("Adaptado3922", document.getElementById("cb3922").checked);
+fd.append("Adaptado4444", document.getElementById("cb4444").checked);
+fd.append("Benchmark", document.getElementById("tbBenchmark").value);
+fd.append("Digito", document.getElementById("tbDigito").value);
+fd.append("CetipDigito", document.getElementById("tbDigitoCETIP").value);
+fd.append("Alavancagem", document.getElementById("tbAlavancagem").value);
+fd.append("ETF", document.getElementById("cbETF").checked);
+fd.append("Derivativos", document.getElementById("cbDerivativos").checked);
+fd.append("TipoInvestidor", document.getElementById("SlctPublico").value);
+fd.append("PassivoRestrito", document.getElementById("cbPassivoRestrito").checked);
+fd.append("TipoCondominio", document.getElementById("SlctTipoCondominio").value);
+fd.append("Interno", document.getElementById("cbInterno").checked);
+fd.append("SubTipo", document.getElementById("SlctSubtipo").value);
+fd.append("Segmento", document.getElementById("SlctSegmento").value);
+fd.append("FIC", document.getElementById("cbFIC").checked);
+fd.append("IncentivoFiscal", document.getElementById("cbIncentivoFiscal").checked);
+fd.append("Abertura", document.getElementById("cbAbertura").checked);
+
+
+
+var oReq = new XMLHttpRequest();
+oReq.open('POST', "/Cadastro/Fundo/Update",true);
+oReq.onload = function() {
+            var result = JSON.parse(this.responseText);    
+            if (trim(result['resposta']) == trim("Falha na Autenticação")){
+                window.location.href = "/Login";
+            }
+            else{
+                    var dvMdl = document.getElementById("tbModalMsgBox");
+                    while (dvMdl.lastElementChild) {dvMdl.removeChild(dvMdl.lastElementChild);}
+                    dvMdl.innerhtml = "";
+                    var span = document.createElement('span');
+                    span.setAttribute('style',"float:left;margin:15px 0px 0px 15px;");
+                    dvMdl.appendChild(span);
+                    span.innerHTML = "<p>" + trim(result['resposta']) + ".</p>";
+                    $(document).ready(function(){$('#ModalMsgBox').modal('show');})
+                    return;
+                }
+            }
+            oReq.send(fd);
+}
+
+function Insert(){
+var fd = new FormData();
+fd.append("idUsuario", document.getElementById("hfUsuario_Id").value);
+fd.append("UsuarioAuth", document.getElementById("hfUsuario_Auth").value );
+
+var ListaMoeda = jsonData['ListaMoeda']
+var ListaBolsa = jsonData['ListaBolsa']
+
+fd.append("Alias", document.getElementById("tbAlias").value);
+fd.append("IDFundo", document.getElementById("tbIdFundo").value);
+fd.append("CGC", document.getElementById("tbCGC").value);
+fd.append("Nome", document.getElementById("tbNome").value);
+fd.append("Tipo", document.getElementById("SlctTipo").value);
+fd.append("RegraResgate", document.getElementById("tbRegraResgate").value);
+fd.append("RegraAplicacao", document.getElementById("tbRegraAplicacao").value);
+fd.append("Administrador", document.getElementById("SlctAdministrador").value);
+fd.append("DataInicioMai", document.getElementById("tbDataInicioMai").value);
+fd.append("DataFimMai", document.getElementById("tbDataFimMai").value);
+fd.append("Descoberto", document.getElementById("cbDescoberto").checked);
+fd.append("Banco", document.getElementById("tbBanco").value);
+fd.append("Agencia", document.getElementById("tbAgencia").value);
+fd.append("Conta", document.getElementById("tbConta").value);
+fd.append("CetipConta", document.getElementById("tbContaCETIP").value);
+fd.append("CetipMiolo", document.getElementById("tbMioloCETIP").value);
+fd.append("ISIN", document.getElementById("tbISIN").value);
+fd.append("AliasCota", "Cota#"+ListaMoeda[document.getElementById("SlctMoeda").value]+ListaBolsa[document.getElementById("SlctBolsa").value]+"@"+document.getElementById("tbCGC").value);
+fd.append("IdBolsa", document.getElementById("SlctBolsa").value);
+fd.append("IdMoeda", document.getElementById("SlctMoeda").value);
+fd.append("Adaptado4661", document.getElementById("cb4661").checked);
+fd.append("Adaptado3922", document.getElementById("cb3922").checked);
+fd.append("Adaptado4444", document.getElementById("cb4444").checked);
+fd.append("Benchmark", document.getElementById("tbBenchmark").value);
+fd.append("Digito", document.getElementById("tbDigito").value);
+fd.append("CetipDigito", document.getElementById("tbDigitoCETIP").value);
+fd.append("ETF", document.getElementById("cbETF").checked);
+fd.append("Derivativos", document.getElementById("cbDerivativos").checked);
+fd.append("TipoInvestidor", document.getElementById("SlctPublico").value);
+fd.append("PassivoRestrito", document.getElementById("cbPassivoRestrito").checked);
+fd.append("TipoCondominio", document.getElementById("SlctTipoCondominio").value);
+fd.append("Interno", document.getElementById("cbInterno").checked);
+fd.append("SubTipo", document.getElementById("SlctSubtipo").value);
+fd.append("Segmento", document.getElementById("SlctSegmento").value);
+fd.append("FIC", document.getElementById("cbFIC").checked);
+fd.append("IncentivoFiscal", document.getElementById("cbIncentivoFiscal").checked);
+fd.append("Abertura", document.getElementById("cbAbertura").checked);
+
+fd.append("Alavancagem", document.getElementById("tbAlavancagem").value);
+fd.append("TaxaPerformance", taxa_to_perc(document.getElementById("tbTaxaPerformance").value) );
+fd.append("TaxaAdministracao", taxa_to_perc(document.getElementById("tbTaxaAdministracao").value));
+
+
+
+var oReq = new XMLHttpRequest();
+oReq.open('POST', "/Cadastro/Fundo/Insert",true);
+oReq.onload = function() {
+            var result = JSON.parse(this.responseText);    
+            if (trim(result['resposta']) == trim("Falha na Autenticação")){window.location.href = "/Login";}
+            else{
+                    var dvMdl = document.getElementById("tbModalMsgBox");
+                    while (dvMdl.lastElementChild) {dvMdl.removeChild(dvMdl.lastElementChild);}
+                    dvMdl.innerhtml = "";
+                    var span = document.createElement('span');
+                    span.setAttribute('style',"float:left;margin:15px 0px 0px 15px;");
+                    dvMdl.appendChild(span);
+                    span.innerHTML = "<p>" + trim(result['resposta']) + ".</p>";
+                    $(document).ready(function(){$('#ModalMsgBox').modal('show');})
+                    return;
+                }
+            }
+            oReq.send(fd);
+}
+
+
+function CarregaBusca(){
+document.getElementById("hfPage").value = 1;
+var fd = new FormData();
+fd.append("idUsuario", document.getElementById("hfUsuario_Id").value);
+fd.append("UsuarioAuth", document.getElementById("hfUsuario_Auth").value );
+fd.append("Search", document.getElementById("TbSearch").value);
+fd.append("Pag", 1);
+fd.append("nPerPag", 10);
+var oReq = new XMLHttpRequest();
+oReq.open('POST', "/Cadastro/Fundo/Search",true);
+oReq.onload = function() {
+                                var result = JSON.parse(this.responseText);  
+                                var Tbl = document.getElementById("TblDados");
+                                while (Tbl.lastElementChild) {Tbl.removeChild(Tbl.lastElementChild);}  
+                                Tbl.innerhtml = "";
+                                var result = JSON.parse(this.responseText);    
+                                if (trim(result['resposta']) == trim("Falha na Autenticação")){window.location.href = "/Login";exit;}
+                                if (trim(result['resposta']) != trim("Ok"))
+                                {document.getElementById("LblDisplayPage").innerText='-';throw new Error(trim(result['resposta']));exit;}
+                                else{
+                                    var Dados=result['Dados'];
+                                    document.getElementById("hfnPages").value = Dados["nPags"];
+                                    document.getElementById("LblDisplayPage").innerText = Dados["Pag"]+" de "+Math.max(Dados["nPags"],1) ;
+                                    for (k in Dados["Lista"]) {
+                                                                var Header = document.createElement('tr');
+                                                                Header.setAttribute('class',"heading-td")
+                                                                Header.setAttribute('id',k);
+                                                                var HeaderCol = document.createElement('td');HeaderCol.innerHTML = Dados["Lista"][k]["CGC"];Header.appendChild(HeaderCol);
+                                                                var HeaderCol = document.createElement('td');HeaderCol.innerHTML = Dados["Lista"][k]["AliasCota"];Header.appendChild(HeaderCol);
+                                                                var HeaderCol = document.createElement('td');HeaderCol.innerHTML = Dados["Lista"][k]["Administrador"];Header.appendChild(HeaderCol);
+                                                                var HeaderCol = document.createElement('td');HeaderCol.innerHTML = '<a id="DeleteObj#'+k+'" onClick="Delete(this.id)"><i class="ti-trash"></i></a>';Header.appendChild(HeaderCol);
+                                                                var HeaderCol = document.createElement('td');HeaderCol.innerHTML = '<a id="DisplayObj#'+k+'" onClick="Display(this.id)"><i class="ti-eye"></i></a>';Header.appendChild(HeaderCol);
+                                                                Tbl.appendChild(Header);
+                                                                }
+                                }
+                            }
+oReq.send(fd);
+}
+
+
+function Display(s){
+var idLista = document.getElementById(s).id;
+var fd = new FormData();
+fd.append("IDFundo", trim(Right(idLista,idLista.length-idLista.search("#")-1)));
+fd.append("idUsuario", document.getElementById("hfUsuario_Id").value);
+fd.append("UsuarioAuth", document.getElementById("hfUsuario_Auth").value );
+var oReq = new XMLHttpRequest();
+oReq.open('POST', "/Cadastro/Fundo/Load",true);
+oReq.onload = function() {
+                            var result = JSON.parse(this.responseText); 
+                            if (trim(result['resposta']) == trim("Falha na Autenticação")){window.location.href = "/Login";exit;}
+                            if (trim(result['resposta']) != trim("Ok")){throw new Error(trim(result['resposta']));exit;}
+                            else{
+                                var Dados=result['Dados'];
+
+                                document.getElementById("tbCGC").value = Dados["CGC"];
+                                document.getElementById("tbNome").value = Dados["Nome"];
+                                document.getElementById("tbAlias").value = Dados["Alias"];
+                                document.getElementById("tbAliasCota").value = Dados["AliasCota"];
+                                document.getElementById("SlctTipo").value = Dados["Tipo"];
+                                document.getElementById("tbIdFundo").value = Dados["IDFundo"];
+                                document.getElementById("tbRegraResgate").value = Dados["RegraResgate"];
+                                document.getElementById("tbRegraAplicacao").value = Dados["RegraAplicacao"];
+                                document.getElementById("SlctAdministrador").value = Dados["Administrador"];
+                                document.getElementById("tbTaxaPerformance").value = perc_to_taxa_brl(Dados["TaxaPerformance"]);
+                                document.getElementById("tbTaxaAdministracao").value = perc_to_taxa_brl(Dados["TaxaAdministracao"]);
+                                if((Dados["DataFimMai"])!=="1899-12-30" && (Dados["DataFimMai"])!=="1900-01-01"){document.getElementById("tbDataFimMai").value = (Dados["DataFimMai"]);}else{document.getElementById("tbDataFimMai").value = "";}
+                                if((Dados["DataInicioMai"])!=="1899-12-30" && (Dados["DataInicioMai"])!=="1900-01-01"){document.getElementById("tbDataInicioMai").value = (Dados["DataInicioMai"]);}else{document.getElementById("tbDataInicioMai").value = "";}
+                                document.getElementById("tbBanco").value = Dados["Banco"];
+                                document.getElementById("tbAgencia").value = Dados["Agencia"];
+                                document.getElementById("tbConta").value = Dados["Conta"];
+                                document.getElementById("tbContaCETIP").value = Dados["CetipConta"];
+                                document.getElementById("tbMioloCETIP").value = Dados["CetipMiolo"];
+                                document.getElementById("tbISIN").value = Dados["ISIN"];
+                                document.getElementById("SlctBolsa").value = Dados["idBolsa"];
+                                document.getElementById("SlctMoeda").value = Dados["idMoeda"];
+                                document.getElementById("cb4661").checked = Dados["Adaptado4661"];
+                                document.getElementById("cb3922").checked = Dados["Adaptado3922"];
+                                document.getElementById("cb4444").checked = Dados["Adaptado4444"];
+                                document.getElementById("tbBenchmark").value = Dados["Benchmark"];
+                                document.getElementById("tbDigito").value = Dados["digito"];
+                                document.getElementById("tbDigitoCETIP").value = Dados["CetipDigito"];
+                                document.getElementById("tbAlavancagem").value = Dados["Alavancagem"];
+                                document.getElementById("cbETF").checked = Dados["ETF"];
+                                document.getElementById("cbDerivativos").checked = Dados["Derivativos"];
+                                document.getElementById("cbDescoberto").checked = Dados["Descoberto"];
+                                document.getElementById("SlctPublico").value = Dados["TipoInvestidor"];
+                                document.getElementById("cbPassivoRestrito").checked = Dados["PassivoRestrito"];
+                                document.getElementById("SlctTipoCondominio").value = Dados["TipoCondominio"];
+                                document.getElementById("cbInterno").checked = Dados["Interno"];
+                                document.getElementById("SlctSubtipo").value = Dados["SubTipo"];
+                                document.getElementById("SlctSegmento").value = Dados["Segmento"];
+                                document.getElementById("cbFIC").checked = Dados["FIC"];
+                                document.getElementById("cbIncentivoFiscal").checked = Dados["IncentivoFiscal"];
+                                document.getElementById("cbAbertura").checked = Dados["Abertura"];                                
+
+                           }
+                          }
+oReq.send(fd);
+}
+
+function Delete(s){
+var idLista = document.getElementById(s).id;
+var fd = new FormData();
+fd.append("IDFundo", trim(Right(idLista,idLista.length-idLista.search("#")-1)));
+fd.append("idUsuario", document.getElementById("hfUsuario_Id").value);
+fd.append("UsuarioAuth", document.getElementById("hfUsuario_Auth").value );
+var oReq = new XMLHttpRequest();
+        oReq.open('POST', "/Cadastro/Fundo/Delete",true);
+        oReq.onload = function() {
+                                        var result = JSON.parse(this.responseText); 
+                                        if (trim(result['resposta']) == trim("Falha na Autenticação")){window.location.href = "/Login";exit;}
+                                        else{
+
+
+                                            var Tbl = document.getElementById("TblDados");
+                                                var vv = false;
+                                                for (var i = 0, row; row = Tbl.rows[i]; i++) {
+                                                    if (row.getAttribute('id') == trim(Right(idLista, idLista.length - idLista.search("#") - 1))) {
+                                                        Tbl.deleteRow(i);
+                                                    }
+                                                }                                               
+
+                                                var dvMdl = document.getElementById("tbModalMsgBox");
+                                                while (dvMdl.lastElementChild) {dvMdl.removeChild(dvMdl.lastElementChild);}
+                                                dvMdl.innerhtml = "";
+                                                var span = document.createElement('span');
+                                                span.setAttribute('style',"float:left;margin:15px 0px 0px 15px;");
+                                                dvMdl.appendChild(span);
+                                                span.innerHTML = "<p>" + trim(result['resposta']) + ".</p>";
+                                                $(document).ready(function(){$('#ModalMsgBox').modal('show');})
+                                                return;
+                                            }
+                                   }
+        oReq.send(fd);
+}
+
+function Proximo(){
+
+if(parseFloat(document.getElementById("hfnPages").value) >= parseFloat(document.getElementById("hfPage").value)+1)
+{document.getElementById("hfPage").value=parseFloat(document.getElementById("hfPage").value)+1;}
+
+var fd = new FormData();
+fd.append("idUsuario", document.getElementById("hfUsuario_Id").value);
+fd.append("UsuarioAuth", document.getElementById("hfUsuario_Auth").value );
+fd.append("Search", document.getElementById("TbSearch").value);
+fd.append("Pag", document.getElementById("hfPage").value);
+fd.append("nPerPag", 10);
+
+var oReq = new XMLHttpRequest();
+oReq.open('POST', "/Cadastro/Fundo/Search",true);
+oReq.onload = function() {
+        var result = JSON.parse(this.responseText);  
+        var Tbl = document.getElementById("TblDados"); 
+        var result = JSON.parse(this.responseText);    
+        if (trim(result['resposta']) == trim("Falha na Autenticação")){window.location.href = "/Login";exit;}
+        if (trim(result['resposta']) != trim("Ok"))
+        {document.getElementById("LblDisplayPage").innerText='-';throw new Error(trim(result['resposta']));exit;}
+        else{
+            while (Tbl.lastElementChild) {Tbl.removeChild(Tbl.lastElementChild);}  
+            Tbl.innerhtml = "";
+            var Dados=result['Dados'];
+            document.getElementById("hfnPages").value = Dados["nPags"];
+            document.getElementById("LblDisplayPage").innerText = Dados["Pag"]+" de "+Math.max(Dados["nPags"],1) ;
+            for (k in Dados["Lista"]) {
+                var Header = document.createElement('tr');
+                Header.setAttribute('class',"heading-td")
+                Header.setAttribute('id',k);
+                var HeaderCol = document.createElement('td');HeaderCol.innerHTML = Dados["Lista"][k]["CGC"];Header.appendChild(HeaderCol);
+                var HeaderCol = document.createElement('td');HeaderCol.innerHTML = Dados["Lista"][k]["AliasCota"];Header.appendChild(HeaderCol);
+                var HeaderCol = document.createElement('td');HeaderCol.innerHTML = Dados["Lista"][k]["Administrador"];Header.appendChild(HeaderCol);
+                var HeaderCol = document.createElement('td');HeaderCol.innerHTML = '<a id="DeleteObj#'+k+'" onClick="Delete(this.id)"><i class="ti-trash"></i></a>';Header.appendChild(HeaderCol);
+                var HeaderCol = document.createElement('td');HeaderCol.innerHTML = '<a id="DisplayObj#'+k+'" onClick="Display(this.id)"><i class="ti-eye"></i></a>';Header.appendChild(HeaderCol);
+                Tbl.appendChild(Header);
+                }
+        }
+    }
+oReq.send(fd);
+}
+
+function Anterior(){
+
+if(1 <= parseFloat(document.getElementById("hfPage").value)-1)
+{document.getElementById("hfPage").value=parseFloat(document.getElementById("hfPage").value)-1;}
+else{throw new Error("Não tem pagina menor que 1!");}
+
+var fd = new FormData();
+fd.append("idUsuario", document.getElementById("hfUsuario_Id").value);
+fd.append("UsuarioAuth", document.getElementById("hfUsuario_Auth").value );
+fd.append("Search", document.getElementById("TbSearch").value);
+fd.append("Pag", document.getElementById("hfPage").value);
+fd.append("nPerPag", 10);
+var oReq = new XMLHttpRequest();
+oReq.open('POST', "/Cadastro/Fundo/Search",true);
+oReq.onload = function() {
+        var result = JSON.parse(this.responseText);  
+        var Tbl = document.getElementById("TblDados"); 
+        var result = JSON.parse(this.responseText);    
+        if (trim(result['resposta']) == trim("Falha na Autenticação")){window.location.href = "/Login";exit;}
+        if (trim(result['resposta']) != trim("Ok"))
+        {document.getElementById("LblDisplayPage").innerText='-';throw new Error(trim(result['resposta']));exit;}
+        else{
+            while (Tbl.lastElementChild) {Tbl.removeChild(Tbl.lastElementChild);}  
+            Tbl.innerhtml = "";
+            var Dados=result['Dados'];
+            document.getElementById("hfnPages").value = Dados["nPags"];
+            document.getElementById("LblDisplayPage").innerText = Dados["Pag"]+" de "+Math.max(Dados["nPags"],1) ;
+            for (k in Dados["Lista"]) {
+                var Header = document.createElement('tr');
+                Header.setAttribute('class',"heading-td")
+                Header.setAttribute('id',k);
+                var HeaderCol = document.createElement('td');HeaderCol.innerHTML = Dados["Lista"][k]["CGC"];Header.appendChild(HeaderCol);
+                var HeaderCol = document.createElement('td');HeaderCol.innerHTML = Dados["Lista"][k]["AliasCota"];Header.appendChild(HeaderCol);
+                var HeaderCol = document.createElement('td');HeaderCol.innerHTML = Dados["Lista"][k]["Administrador"];Header.appendChild(HeaderCol);
+                var HeaderCol = document.createElement('td');HeaderCol.innerHTML = '<a id="DeleteObj#'+k+'" onClick="Delete(this.id)"><i class="ti-trash"></i></a>';Header.appendChild(HeaderCol);
+                var HeaderCol = document.createElement('td');HeaderCol.innerHTML = '<a id="DisplayObj#'+k+'" onClick="Display(this.id)"><i class="ti-eye"></i></a>';Header.appendChild(HeaderCol);
+                Tbl.appendChild(Header);
+                }
+        }
+    }
+oReq.send(fd);
+}
+
+</script>
+
+</body>
+
+</html>
