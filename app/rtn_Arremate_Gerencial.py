@@ -5,14 +5,13 @@ warnings.filterwarnings("ignore")
 sys.path.append(r"../")
 from app import app
 from app.classes.cl_Gerencial import cl_Gerencial
-from flask import render_template as render_template
 
 print('Inicio Carga de Dados:' + app.dt.now().strftime('%Y-%m-%d %H:%M:%S'))
 Gerencial = cl_Gerencial()
-dfDados = app.pd.read_excel(r"../app/Novo_Gerencial.xlsm", 'Dados',skiprows=[0])
-dfData = app.pd.read_excel(r"../app/Novo_Gerencial.xlsm", 'Dt_Param',skiprows=[0])
+dfDados = app.pd.read_excel(r"../Novo_Gerencial.xlsm", 'Dados',skiprows=[0])
+dfData = app.pd.read_excel(r"../Novo_Gerencial.xlsm", 'Dt_Param',skiprows=[0])
 data = app.dt.strptime(dfData['Data Processamento'].iloc[0].strftime('%Y-%m-%d'),'%Y-%m-%d')
-dflistacgcs = app.pd.read_excel(r"../app/Novo_Gerencial.xlsm", 'Lista_CGCs',skiprows=[0])
+dflistacgcs = app.pd.read_excel(r"../Novo_Gerencial.xlsm", 'Lista_CGCs',skiprows=[0])
 listacgcs = []
 for index,row in dflistacgcs.iterrows():listacgcs.append(app.tkstr.Right('0000' + str(row['Lista CGCs']),14))
 Data = app.pd.to_datetime(data,errors='coerce')
@@ -145,12 +144,13 @@ dfDados['Perc_Carrego'] = dfDados['Resultado']/dfDados['Carrego']
 dfDados['Perc_Carregi_Espec'] = dfDados['Resultado']/dfDados['Carrego'] 
 dfDados['Perc_PL'] = dfDados['Resultado']/dfDados['PL'] 
 dfDados = dfDados.fillna(0)
-dfDados.loc[(dfDados['Perc_Carrego']==app.np.Inf)|(dfDados['Perc_Carrego']==-app.np.Inf),'Perc_Carrego'] = 0
-dfDados.loc[(dfDados['Perc_Carregi_Espec']==app.np.Inf)|(dfDados['Perc_Carregi_Espec']==-app.np.Inf),'Perc_Carregi_Espec'] = 0
+dfDados.loc[(dfDados['Perc_Carrego']==app.np.inf)|(dfDados['Perc_Carrego']==-app.np.inf),'Perc_Carrego'] = 0
+dfDados.loc[(dfDados['Perc_Carregi_Espec']==app.np.inf)|(dfDados['Perc_Carregi_Espec']==-app.np.inf),'Perc_Carregi_Espec'] = 0
 
 print('unBulkando ' + data.strftime('%Y-%m-%d') + ' : ' + app.dt.now().strftime('%Y-%m-%d %H:%M:%S'))
 dfDados = dfDados[['Data','AliasFundo','Trader','AliasAtivo','Macro','Estrat','Quantidade','Fin','FinD1','Resultado','Carrego','Over_Carrego','Carrego_Espec','Over_Carrego_Espec','Perc_Carrego','Perc_Carregi_Espec','PL','Indice_Espec','Perc_PL']]
 dfDados_list_aliasfundo = dfDados['AliasFundo'].drop_duplicates().reset_index().copy()
+dfDados_list_aliasfundo = dfDados_list_aliasfundo[dfDados_list_aliasfundo['AliasFundo']!=0].copy()
 for index,row in dfDados_list_aliasfundo.iterrows():Gerencial.unbulk(
                                                                         dfDados[dfDados['AliasFundo'] == row['AliasFundo']]['Data'].min(),
                                                                         dfDados[dfDados['AliasFundo'] == row['AliasFundo']]['Data'].max(),
@@ -224,6 +224,7 @@ and data >= '""" + DataInicio12meses.strftime('%Y-%m-%d') + """'
 
 print('Inicio Carga de Dados Gerencial:' + app.dt.now().strftime('%Y-%m-%d %H:%M:%S'))
 dfDados = app.pd.read_sql_query(sql, app.db.engine)
+
 dfDados['bps_Carrego_total'] = dfDados['Carrego']/dfDados['FinD1']*10000
 dfDados['bps_Carrego_espec_total'] = dfDados['Carrego_Espec']/dfDados['FinD1']*10000 
 dfDados['bps_Carrego_total'] = dfDados['bps_Carrego_total'].fillna(0)
@@ -243,6 +244,8 @@ dfDados['perc_posD1'] = dfDados['FinD1']/dfDados['FinD1_total']
 dfDados['bps'] = dfDados['bps_total'] * dfDados['perc_resultado'] 
 dfDados['bps_carrego'] = dfDados['bps_Carrego_total'] * dfDados['perc_posD1'] 
 dfDados['bps_Carrego_espec'] = dfDados['bps_Carrego_espec_total'] * dfDados['perc_posD1'] 
+dfDados['bps_ob'] = dfDados['bps'] - dfDados['bps_carrego']
+dfDados['bps_ob_esp'] = dfDados['bps'] - dfDados['bps_Carrego_espec']
 dfDados = dfDados[[
                 'Data',
                 'AliasFundo',
@@ -258,24 +261,31 @@ dfDados = dfDados[[
                 'PL',
                 'bps',
                 'bps_carrego',
-                'bps_Carrego_espec'
+                'bps_Carrego_espec',
+                'bps_ob',
+                'bps_ob_esp'
                 ]].copy()
 
 dfDados['Mes'] = dfDados['Data'].dt.month
 dfDados['Ano'] = dfDados['Data'].dt.year
 dfDados['Data'] = dfDados['Data'].dt.strftime('%Y-%m-%d')
-json_deparaBench = dfdeparaBench.to_json(orient="records")
-json_Dados = dfDados.to_json(orient="records")
-print('Inicio Montagem Report HTML:' + app.dt.now().strftime('%Y-%m-%d %H:%M:%S'))
-if app.tkfm.file_exists(r"../app/templates/Pivot_Table_Template.html"): 
-    pagebody = codecs.open(r"../app/templates/Pivot_Table_Template.html", encoding="utf-8", errors='xmlcharrefreplace' ).read()
-    pagebody = pagebody.replace('{{ Dados }}',json_Dados)
-    pagebody = pagebody.replace('{{ DadosB }}',json_deparaBench)
-    with open(r"Z:/Banco de Dados/Python/app/Pivot_Table_Filled.html", 'w', encoding="utf-8", errors='xmlcharrefreplace' ) as f: f.write(pagebody)
-else:
-    print('Erro ao Carregar Template')
-
-
+dfDados = dfDados[dfDados['Ano'] == data.year].copy()
+dfDados = dfDados[app.pd.to_datetime(dfDados['Data'])>=app.pd.to_datetime(app.dt.strptime('2024-10-01','%Y-%m-%d'))]
+del dfDados['PL']
+for index,row in dfdeparaBench.iterrows():
+    json_deparaBench = dfdeparaBench.to_json(orient="records")
+    json_Dados = dfDados[dfDados['AliasFundo']==row['AliasFundo']].copy().to_json(orient="records")
+    print('Inicio Montagem Report HTMLs:' + app.dt.now().strftime('%Y-%m-%d %H:%M:%S'))
+    if app.tkfm.file_exists(r"../app/templates/Pivot_Table_Template_Individual.html"): 
+        pagebody = codecs.open(r"../app/templates/Pivot_Table_Template_Individual.html", encoding="utf-8", errors='xmlcharrefreplace' ).read()
+        pagebody = pagebody.replace('{{ Dados }}',json_Dados)
+        pagebody = pagebody.replace('{{ AnoBase }}',str(data.year))
+        pagebody = pagebody.replace('{{ Fundo }}',row['AliasFundo'])
+        pagebody = pagebody.replace('{{ DataBase }}',data.strftime('%Y-%m-%d'))
+        pagebody = pagebody.replace('{{ Benchmark }}',row['bench'])
+        with open(r"Z:/Banco de Dados/Python/app/ReportsGerencial/Gerencial_" + row['AliasFundo'] + "_" + str(data.year) + ".html", 'w', encoding="utf-8", errors='xmlcharrefreplace' ) as f: f.write(pagebody)   
+    else:
+        print('Erro ao Carregar Template')
 print('Fim Montagem Report HTML:' + app.dt.now().strftime('%Y-%m-%d %H:%M:%S'))
 
 

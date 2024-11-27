@@ -19,8 +19,7 @@ class cl_tkDatetime:
             self.Feriados = self.load_dict_feriados()
             self.Feriados = self.Feriados[self.Feriados['Tipo']==Tipo]
         if type(Data) == type(app.dt.now()):
-            Data = app.pd.to_datetime(Data)
-            if Data in self.Feriados['Data'].values: return True  
+            if len(self.Feriados[self.Feriados['Data'] == app.pd.to_datetime(app.dt.strptime(Data.strftime('%Y-%m-%d'),'%Y-%m-%d')) ])>0: return True  
             else: return False
         elif len(Data)>1:
             df = app.pd.DataFrame(app.pd.Series(Data, name='Data'))

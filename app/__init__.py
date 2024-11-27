@@ -96,6 +96,14 @@ elif app.enviroment == 'local_surface':
     app.test_idUsuario = 1
 
 elif app.enviroment == 'hml':
+    app.server = r'MAGDB04SQLVMHMG,4030'
+    app.database = 'MAI'
+    app.usr = ''
+    app.pwd = ''
+    app.params = urllib.parse.quote_plus(r"DRIVER={ODBC Driver 17 for SQL Server};SERVER=" + app.server + ";DATABASE=" + app.database + ";Trusted_Connection=yes;")
+    app.test_idUsuario = 1
+
+elif app.enviroment == 'dsv':
     app.server = r'MAGDB04SQLVMDEV,4030'
     app.database = 'MAI'
     app.usr = ''

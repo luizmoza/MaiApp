@@ -176,6 +176,12 @@ class cl_tk:
         if perc == 0:  
             if perc2 == 0: 
                 if perc3 == 0 : perc = 1
+
+        if Indice == 'IBOVESPA':  Indice = 'Ibovespa'
+        if Indice2 == 'IBOVESPA':  Indice2 = 'Ibovespa'
+        if Indice3 == 'IBOVESPA':  Indice3 = 'Ibovespa'
+
+
         sql = """ 
         Select 
         Data,
