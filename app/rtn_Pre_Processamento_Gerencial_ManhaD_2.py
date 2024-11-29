@@ -47,6 +47,14 @@ print('Processando ... :' + strlistacgcs)
 #Verifica se existe algum apontamento de pos Vs sum(mov) !! se existir para aqui!!
 #Verifica se existe Apontamento False Call de Clean Dialy !! se não existir para aqui!!
 #Verifica se todas as cotas de fundos em posição tem boletas (Com Estratégias associadas a elas) ou cadastro na planilha!!!!!
+
+
+
+
+
+
+
+
 ############################################### Antes de Começar ###############################################################
 ################################################################################################################################
 ###############################################################################################################################

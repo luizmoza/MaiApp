@@ -47,6 +47,205 @@ print('Processando ... :' + strlistacgcs)
 #Verifica se existe algum apontamento de pos Vs sum(mov) !! se existir para aqui!!
 #Verifica se existe Apontamento False Call de Clean Dialy !! se não existir para aqui!!
 #Verifica se todas as cotas de fundos em posição tem boletas (Com Estratégias associadas a elas) ou cadastro na planilha!!!!!
+################################################################################################################################
+######################################## Ajuste Posição Dividendos e Alugueis ##################################################
+
+
+# ### Apagar essa linha quando for para rodar a vera....
+#strlistacgcs = "('42494899000196','14550994000124')"
+# ### Apagar essa linha quando for para rodar a vera....
+
+
+def stringcontainsnumericcar(s):
+    vv = False
+    for x in s:
+        if x.isnumeric():
+            vv = True
+    return vv
+
+def stringonlyupper(s):
+    vv = False
+    for x in s:
+        if x == x.upper():
+            vv = True
+    return vv
+
+def has_special_char(text: str) -> bool:
+    return any(c for c in text if not c.isalnum() and not c.isspace())
+
+
+def checkposrowisunique(row) -> bool:
+    sql = "select * from posicao where data = '" + row['Data'].strftime('%Y-%m-%d') + "'"
+    sql = sql + " and cgc = '" + row['CGC'] + "'"
+    sql = sql + " and AliasOperacao = '" + row['AliasOperacao'] + "'"
+    df = app.pd.read_sql_query(sql, app.db.engine)
+    if len(df)==1:
+        return True
+    else:
+        return False
+
+
+def zeraresultadolinhaposicao(row) -> bool:
+    sql = "select * from posicao where data = '" + row['Data'].strftime('%Y-%m-%d') + "'"
+    sql = sql + " and cgc = '" + row['CGC'] + "'"
+    sql = sql + " and AliasOperacao = '" + row['AliasOperacao'] + "'"
+    df = app.pd.read_sql_query(sql, app.db.engine)
+    if len(df)==1:
+        if app.db.isConnected() == False:app.db.connect()
+        sql = "Update posicao set Resultado = 0 where data = '" + row['Data'].strftime('%Y-%m-%d') + "'"
+        sql = sql + " and cgc = '" + row['CGC'] + "'"
+        sql = sql + " and AliasOperacao = '" + row['AliasOperacao'] + "'"
+        app.db.execRawQuery(sql) 
+    else:
+        return False
+
+def inserelinhaposicao(row,k,newop) -> bool:
+    sql = "select * from Posicao where data = '" + row['Data'].strftime('%Y-%m-%d') + "'"
+    sql = sql + " and cgc = '" + row['CGC'] + "'"
+    sql = sql + " and AliasOperacao = '" + row['AliasOperacao'] + "'"
+    dfold = app.pd.read_sql_query(sql, app.db.engine)
+    del dfold['IDPosicao']
+    sql = "select * from Posicao where data = '" + row['Data'].strftime('%Y-%m-%d') + "'"
+    sql = sql + " and cgc = '" + row['CGC'] + "'"
+    sql = sql + " and AliasOperacao = '" + newop + "'"
+    dfnew = app.pd.read_sql_query(sql, app.db.engine)
+    if len(dfnew)==0:
+        if len(dfold)==1:
+                dfold['AliasOperacao'] = newop
+                dfold['AliasAtivo'] = k
+                dfold['Qtd'] = 0
+                dfold['Pu'] = 0
+                dfold['VL'] = 0
+                dfold['CPR'] = 0
+                dfold['Caixa'] = 0
+                dfold['Qtd1'] = 0
+                dfold['Pu1'] = 0
+                dfold['VL1'] = 0
+                dfold['CPR1'] = 0
+                dfold['Caixa1'] = 0
+                dfold['Fin1'] = 0
+                dfold['Fin'] = 0
+                dfold.to_sql('Posicao', app.db.engine, if_exists='append', index=False)
+                return True
+        else:
+            return False
+    else:
+        if len(dfold)==1:
+            if app.db.isConnected() == False:app.db.connect()
+            sql = "update Posicao set Resultado = Resultado + '" + ("{:10.4f}".format(dfold['Resultado'].iloc[0])) + "' where data = '" + row['Data'].strftime('%Y-%m-%d') + "'"
+            sql = sql + " and cgc = '" + row['CGC'] + "'"
+            sql = sql + " and AliasOperacao = '" + newop + "'"
+            app.db.execRawQuery(sql) 
+        else:
+            return False
+    return True
+
+def inserteoperacaonovasenaoexistir(row,k,newop) -> bool:
+    sql = "select * from operacao where "
+    sql = sql + " cgc = '" + row['CGC'] + "'"
+    sql = sql + " and AliasOperacao = '" + row['AliasOperacao'] + "'"
+    dfold = app.pd.read_sql_query(sql, app.db.engine)
+    if len(dfold)==1:
+        sql = "select * from operacao where "
+        sql = sql + " cgc = '" + row['CGC'] + "'"
+        sql = sql + " and AliasOperacao = '" + newop + "'"
+        dfnew = app.pd.read_sql_query(sql, app.db.engine)
+        if len(dfnew)==0:
+            dfold['AliasOperacao'] = newop
+            dfold['AliasAtivo'] = k
+            dfold.to_sql('Operacao', app.db.engine, if_exists='append', index=False)
+            return True
+        else:
+            return True
+    else:
+        return False
+
+
+
+sql = """
+SELECT Posicao.Data
+  ,Posicao.CGC
+  ,Posicao.AliasAtivo
+ 	  ,operacao.AliasAtivo
+  ,Posicao.AliasOperacao
+  ,Posicao.Qtd
+  ,Posicao.Pu
+  ,Posicao.VL
+  ,Posicao.CPR
+  ,Posicao.Caixa
+  ,Posicao.Fin
+  ,Posicao.Qtd1
+  ,Posicao.Pu1
+  ,Posicao.VL1
+  ,Posicao.CPR1
+  ,Posicao.Caixa1
+  ,Posicao.Fin1
+  ,Posicao.Resultado
+  ,Posicao.CorretagemFut
+  ,Posicao.CorretagemAVista
+  ,Posicao.MovQtd
+  ,Posicao.MovPu
+  ,Posicao.Mov
+  ,Posicao.Validador
+  ,Posicao.Justificativa
+  FROM  Posicao
+  inner join operacao on operacao.cgc = posicao.cgc and operacao.AliasOperacao = posicao.AliasOperacao
+  where posicao.cgc in """ + strlistacgcs + """ 
+  and posicao.data = '""" + data.strftime('%Y-%m-%d') + """'
+  and operacao.AliasAtivo = 'SPOT#BRLOTC@REAL'
+  and (
+  posicao.AliasOperacao like '%Receb%Juros%'
+  or
+  posicao.AliasOperacao like '%Receb%Divid%'
+  or
+  posicao.AliasOperacao like '%Dividendos %'
+  or
+  posicao.AliasOperacao like '%Empréstimo de Ações a Receber para o papel%'
+  or
+  posicao.AliasOperacao like '%Empr. de Ações a receber para o papel%'
+  or
+  posicao.AliasOperacao like '%Empr. de Ações a receber para o papel%'
+  )
+  and Resultado <> 0
+"""
+dfeventoscorporativosposicao = app.pd.read_sql_query(sql, app.db.engine)
+
+for index,row in dfeventoscorporativosposicao.iterrows():
+    saliasoperacao = row['AliasOperacao'].split()
+    for k in saliasoperacao:
+        vvonlyupper = stringonlyupper(k)
+        vvcontainsnumeric = stringcontainsnumericcar(k)
+        if vvonlyupper and vvcontainsnumeric and (not has_special_char(k)):
+            k = "RV#BRLB3@" + k
+            if checkposrowisunique(row):
+                if 'Juros' in row['AliasOperacao']: 
+                    newop='JSCP :' + k 
+                elif 'Divid' in row['AliasOperacao']: 
+                    newop='Dividendos :' + k 
+                elif 'Empr' in row['AliasOperacao']: 
+                    newop='Emprestimos :' + k 
+                else: 
+                    newop='EventoCorporativo :' + k 
+                print('Começando Tratamento : ' + newop)
+#                sys.exit('Para1')
+                if inserteoperacaonovasenaoexistir(row,k,newop):
+                    if inserelinhaposicao(row,k,newop):
+                        if zeraresultadolinhaposicao(row):
+                            print( k + 'Tratado com sucesso!')
+
+
+#sys.exit('Para!')
+
+
+
+
+
+
+######################################## Ajuste Posição Dividendos e Alugueis ##################################################
+################################################################################################################################
+
+
+
 ############################################### Antes de Começar ###############################################################
 ################################################################################################################################
 ###############################################################################################################################
