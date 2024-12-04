@@ -313,6 +313,7 @@ class cl_tk:
         Indice3 = None
         perc3 = 1
         aditivo3 = 0
+#        print(s)
         if app.tkstr.Instr(1, s, " ") != 0 : return 'Erro de Formula1'
         if app.tkstr.Instr(1, s, "(") != 0 and app.tkstr.Instr(1, s, ")") == 0 : return 'Erro de Formula2'
         if app.tkstr.Instr(1, s, "(") == 0 and app.tkstr.Instr(1, s, ")") != 0 : return 'Erro de Formula3'
