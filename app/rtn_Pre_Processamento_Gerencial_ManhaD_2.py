@@ -358,6 +358,12 @@ dfPus.loc[ (dfPus['isFuture']) & (dfPus['XPUD_1']!=0) ,'PUD_1'] = dfPus['XPUD_1'
 dfPus.loc[ (dfPus['isNTNB']) & (dfPus['XPUD0']!=0) ,'PUD0'] = dfPus['XPUD0'] # Pega os preços das NTNBs das Tabelas de Fechamento (Dados Públicos)
 dfPus.loc[ (dfPus['isNTNB']) & (dfPus['XPUD_1']!=0),'PUD_1'] = dfPus['XPUD_1'] # Pega os preços das NTNBs das Tabelas de Fechamento (Dados Públicos)
 dfPus = dfPus[['AliasAtivo','CGC','PUD_1','PUD0']].drop_duplicates(keep='last').reset_index()[['AliasAtivo','CGC','PUD_1','PUD0']].copy()
+
+
+dfPus = dfPus.sort_values(["PUD0", "PUD_1"],ascending = True)
+dfPus = dfPus.drop_duplicates(subset=['AliasAtivo','CGC'],keep='last')
+
+
 sql = """
 Select distinct data,posicao.cgc,posicao.aliasoperacao,operacao.aliasativo,qtd,pu,fin,resultado 
 from posicao left join operacao on operacao.aliasoperacao = posicao.aliasoperacao and posicao.cgc = operacao.cgc

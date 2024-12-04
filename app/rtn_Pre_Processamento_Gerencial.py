@@ -39,6 +39,13 @@ else:
     print('Data utilizada: ' + data.strftime('%Y-%m-%d'))  
 data = app.dt.strptime(data.strftime('%Y-%m-%d'),'%Y-%m-%d')    
 strlistacgcs = f'{*listacgcs,}'
+
+
+
+#strlistacgcs = "('14550994000124')"
+
+
+
 print('Processando ... :' + strlistacgcs)
 ##################################### Coletando Dados do Pré Processamento  ##################################################
 ################################################################################################################################
@@ -237,10 +244,6 @@ for index,row in dfeventoscorporativosposicao.iterrows():
 #sys.exit('Para!')
 
 
-
-
-
-
 ######################################## Ajuste Posição Dividendos e Alugueis ##################################################
 ################################################################################################################################
 
@@ -339,6 +342,13 @@ dfPusOps = dfPusOps[dfPusOps['NotMTMAtivo']==True].copy()
 dfPusOps.loc[dfPusOps['qtd']!=0,'PUD0'] = dfPusOps['fin']/dfPusOps['qtd']/dfPusOps['Mltpl']
 dfPusOps.loc[dfPusOps['qtd1']!=0,'PUD_1'] = dfPusOps['fin1']/dfPusOps['qtd1']/dfPusOps['Mltpl']
 dfPusOps = dfPusOps[['AliasAtivo','CGC','AliasOperacao','PUD_1','PUD0']].copy()
+
+
+
+
+
+
+
 dfPus.loc[((dfPus['qtd']!=0) & (dfPus['qtd']!=1)) ,'PUD0'] = dfPus['vl']/ dfPus['qtd']/dfPus['Mltpl']
 dfPus.loc[((dfPus['qtd1']!=0) & (dfPus['qtd1']!=1)) ,'PUD_1'] = dfPus['vl1']/ dfPus['qtd1']/dfPus['Mltpl']
 dfPus['isFuture'] = False
@@ -352,6 +362,13 @@ dfPus.loc[ (dfPus['isFuture']) & (dfPus['XPUD_1']!=0) ,'PUD_1'] = dfPus['XPUD_1'
 dfPus.loc[ (dfPus['isNTNB']) & (dfPus['XPUD0']!=0) ,'PUD0'] = dfPus['XPUD0'] # Pega os preços das NTNBs das Tabelas de Fechamento (Dados Públicos)
 dfPus.loc[ (dfPus['isNTNB']) & (dfPus['XPUD_1']!=0),'PUD_1'] = dfPus['XPUD_1'] # Pega os preços das NTNBs das Tabelas de Fechamento (Dados Públicos)
 dfPus = dfPus[['AliasAtivo','CGC','PUD_1','PUD0']].drop_duplicates(keep='last').reset_index()[['AliasAtivo','CGC','PUD_1','PUD0']].copy()
+
+dfPus = dfPus.sort_values(["PUD0", "PUD_1"],ascending = True)
+dfPus = dfPus.drop_duplicates(subset=['AliasAtivo','CGC'],keep='last')
+#sys.exit('Para!')
+
+
+
 sql = """
 Select distinct data,posicao.cgc,posicao.aliasoperacao,operacao.aliasativo,qtd,pu,fin,resultado 
 from posicao left join operacao on operacao.aliasoperacao = posicao.aliasoperacao and posicao.cgc = operacao.cgc

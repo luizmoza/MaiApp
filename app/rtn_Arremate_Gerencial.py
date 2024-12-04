@@ -17,6 +17,11 @@ for index,row in dflistacgcs.iterrows():listacgcs.append(app.tkstr.Right('0000' 
 Data = app.pd.to_datetime(data,errors='coerce')
 data = app.dt.strptime(data.strftime('%Y-%m-%d'),'%Y-%m-%d')    
 strlistacgcs = f'{*listacgcs,}'
+
+
+
+
+
 dfDados = dfDados.drop(dfDados.columns[26],axis=1)
 dfDados = dfDados.drop(dfDados.columns[25],axis=1)
 dfDados = dfDados.drop(dfDados.columns[24],axis=1)
