@@ -661,7 +661,7 @@ dfMovsD0.loc[dfMovsD0['Qtd']!=0 ,'PUD_1'] = dfMovsD0['fin']/dfMovsD0['Qtd']
 dfMovsD0.loc[dfMovsD0['Qtd']==0 ,'PUD_1'] = dfMovsD0['fin']
 dfMovsD0.loc[dfMovsD0['PUD0'].isna(),'PUD0'] = 1
 dfMovsD0.loc[dfMovsD0['PUD_1'].isna(),'PUD_1'] = 1
-dfMovsD0.loc[dfMovsD0['DayTrade'],'Caixa'] = dfMovsD0['fin']
+dfMovsD0.loc[dfMovsD0['DayTrade'],'Caixa'] = dfMovsD0['fin']*dfMovsD0['Mltpl']
 dfMovsD0['fin'] = dfMovsD0['Qtd']*dfMovsD0['PUD0']*dfMovsD0['Mltpl'] 
 dfMovsD0['fin_1'] = dfMovsD0['Qtd']*dfMovsD0['PUD_1']*dfMovsD0['Mltpl'] 
 dfCaixaBoletaAutomatica = dfCaixaBoletaAutomatica.rename(columns={"cgc": "CGC","aliasativo": "AliasAtivo","grupo": "Grupo","nome": "Nome","aliasoperacao": "AliasOperacao",'resultado':'CaixaBoletasAutomaticas'})
