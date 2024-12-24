@@ -65,6 +65,7 @@ class FFlask(Flask):
         self.fotopath = r'../static/images/UserProfile/Profile'
         self.headerpath = r'\app\templates\Header.html'
         self.sidebarpath = r'\app\templates\SideBar.html'
+        self.dtstr = '%Y-%m-%d'
 
 app = FFlask(__name__)
 
@@ -72,7 +73,7 @@ app = FFlask(__name__)
 ################################################### Moc Banco de Dados ################################################################
 
 if app.enviroment == 'prd':
-    app.server = r'MAG-MAI-PRD,1433'
+    app.server = r'10.245.243.5'
     app.database = 'MAI'
     app.usr = 'usr_appMai'
     app.pwd = '9962v3DrlKo0h6qR157ssetDGA'
